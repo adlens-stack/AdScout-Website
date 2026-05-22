@@ -1,7 +1,0 @@
-@import "../../adscout-design-system/tokens.css";
-@import "../../adscout-design-system/typography.css";
-@import "../../adscout-design-system/components.css";
-
-@tailwind base;
-@tailwind components;
-@tailwind utilities;

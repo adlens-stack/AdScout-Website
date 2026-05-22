@@ -1,0 +1,147 @@
+/* AdScout Design System — Colors & Type */
+/* ============================================================ */
+/* Based on AdScout Figma file. Dark, terminal-grade, with a
+   signature electric lime-green accent. */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+:root {
+  /* ------- Core brand ------- */
+  --brand-lime: rgb(201, 244, 20);       /* Signature electric-lime accent */
+  --brand-lime-strong: rgb(229, 255, 0);
+  --brand-lime-10: rgba(201,244,20, 0.10);
+  --brand-lime-20: rgba(201,244,20, 0.20);
+  --brand-lime-30: rgba(201,244,20, 0.30);
+  --brand-lime-40: rgba(201,244,20, 0.40);
+  --brand-lime-shadow: 0 0 20px rgba(201,244,20, 0.10);
+
+  /* ------- Surfaces (dark stack) ------- */
+  --bg-0: rgb(10, 10, 15);              /* Page bg (near-black) */
+  --bg-1: rgb(14, 14, 19);              /* Terminal row */
+  --bg-2: rgb(18, 18, 26);              /* Inset panel */
+  --bg-3: rgb(27, 27, 32);              /* Card */
+  --bg-4: rgb(31, 31, 37);              /* Nested card */
+  --bg-5: rgb(42, 41, 47);              /* Elevated control / input */
+  --bg-6: rgb(53, 52, 58);              /* Segmented control inactive */
+  --surface-glass: rgba(10, 10, 15, 0.80);
+  --surface-nav-blur: 24px;
+
+  /* ------- Foreground (text) ------- */
+  --fg-1: rgb(255, 255, 255);           /* Display / primary */
+  --fg-2: rgb(228, 225, 233);           /* Secondary body */
+  --fg-3: rgb(196, 201, 172);           /* Tertiary (olive-cream, terminal meta) */
+  --fg-4: rgb(148, 163, 184);           /* Muted UI */
+  --fg-5: rgb(100, 116, 139);           /* Footer, labels */
+  --fg-disabled: rgba(196, 201, 172, 0.40);
+
+  /* ------- Borders & hairlines ------- */
+  --border-hairline: rgba(68, 73, 51, 0.15);   /* Signature olive-ish hairline */
+  --border-hairline-strong: rgba(68, 73, 51, 0.30);
+  --border-slate: rgba(30, 41, 59, 0.50);
+
+  /* ------- Data / semantic ------- */
+  --data-blue: rgb(59, 130, 246);
+  --data-blue-soft: rgb(96, 165, 250);
+  --data-blue-20: rgba(59, 130, 246, 0.20);
+  --data-green: rgb(34, 197, 94);
+  --data-yellow: rgb(250, 204, 21);
+  --data-red: rgb(239, 68, 68);
+  --data-orange: rgb(249, 115, 22);
+  --data-purple: rgb(168, 85, 247);
+  --data-pink: rgb(236, 72, 153);
+  --data-cyan: rgb(6, 182, 212);
+  --data-violet: rgb(139, 92, 246);
+
+  /* Categorical chart palette (ordered for readability on dark) */
+  --chart-1: var(--brand-lime);     /* #C9F414 */
+  --chart-2: var(--data-green);     /* #22C55E */
+  --chart-3: var(--data-orange);    /* #F97316 */
+  --chart-4: var(--data-purple);    /* #A855F7 */
+  --chart-5: var(--data-pink);      /* #EC4899 */
+  --chart-6: var(--data-blue);      /* #3B82F6 */
+  --chart-7: var(--data-cyan);      /* #06B6D4 */
+  --chart-8: var(--data-yellow);    /* #FACC15 */
+  --chart-9: var(--data-red);       /* #EF4444 */
+  --chart-10: var(--data-violet);   /* #8B5CF6 */
+
+  --success: var(--brand-lime);
+  --info: var(--data-blue-soft);
+  --warning: var(--data-yellow);
+  --danger: var(--data-red);
+
+  /* ------- Shadows ------- */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md: 0 8px 10px -6px rgba(0, 0, 0, 0.10),
+               0 20px 25px -5px rgba(0, 0, 0, 0.10);
+  --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-nav: 0 20px 40px 0 rgba(0, 0, 0, 0.40);
+  --shadow-glow-lime: 0 0 20px rgba(201,244,20, 0.10);
+
+  /* ------- Radii ------- */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-pill: 9999px;
+
+  /* ------- Spacing (4px grid) ------- */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ------- Typography — families ------- */
+  --font-display: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body:    "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* ------- Motion ------- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-med: 200ms;
+  --dur-slow: 320ms;
+}
+
+/* ============================================================
+   Type roles — reusable classes
+   ============================================================ */
+
+.ds-display-xl { font: 800 96px/1.0 var(--font-display); letter-spacing: -4.8px; color: var(--fg-1); }
+.ds-display    { font: 700 72px/1.0 var(--font-display); letter-spacing: -3.6px; color: var(--fg-1); }
+.ds-h1         { font: 700 60px/1.05 var(--font-display); letter-spacing: -3px; color: var(--fg-1); }
+.ds-h2         { font: 700 48px/1.0 var(--font-display); letter-spacing: -2.4px; color: var(--fg-1); }
+.ds-h3         { font: 700 24px/1.33 var(--font-display); color: var(--fg-1); }
+.ds-h4         { font: 700 20px/1.4 var(--font-display); color: var(--fg-1); }
+.ds-h5         { font: 600 16px/1.5 var(--font-body); color: var(--fg-1); }
+
+.ds-body-lg    { font: 400 20px/1.625 var(--font-body); color: var(--fg-3); }
+.ds-body       { font: 400 16px/1.5 var(--font-body); color: var(--fg-3); }
+.ds-body-sm    { font: 400 14px/1.5 var(--font-body); color: var(--fg-4); }
+.ds-label      { font: 500 14px/1.4 var(--font-body); color: var(--fg-4); }
+
+.ds-mono       { font: 400 12px/1.33 var(--font-mono); color: var(--fg-3); }
+.ds-mono-sm    { font: 400 10px/1.5 var(--font-mono); letter-spacing: 1px; color: var(--fg-3); text-transform: uppercase; }
+.ds-mono-lg    { font: 700 36px/1.1 var(--font-mono); color: var(--brand-lime); }
+.ds-mono-data  { font: 400 14px/1.43 var(--font-mono); color: var(--fg-2); }
+.ds-caps       { font: 400 10px/1.5 var(--font-mono); letter-spacing: 1.2px; color: var(--fg-5); text-transform: uppercase; }
+
+/* ============================================================
+   Reset + base
+   ============================================================ */
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--bg-0);
+  color: var(--fg-2);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}

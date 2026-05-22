@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>About · AdScout</title>
+<link rel="stylesheet" href="legal/legal.css">
+<style>
+  .ab-shell { max-width: 960px; margin: 0 auto; padding: 64px 32px 96px; }
+
+  /* Hero */
+  .ab-hero { padding: 24px 0 48px; max-width: 760px; }
+  .ab-hero h1 {
+    margin: 18px 0 16px;
+    font: 700 clamp(40px, 6vw, 72px)/1.02 var(--font-display);
+    letter-spacing: -2.6px; color: #fff; text-wrap: balance;
+  }
+  .ab-hero h1 em {
+    font-style: normal; color: var(--brand-lime);
+    font-family: var(--font-display);
+    font-size: inherit; letter-spacing: inherit;
+  }
+  .ab-hero .lede {
+    margin: 0; max-width: 620px;
+    font: 400 18px/1.6 var(--font-body); color: var(--fg-3); text-wrap: pretty;
+  }
+
+  /* Quick stat strip under hero */
+  .ab-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border-hairline);
+    margin-top: 40px;
+  }
+  .ab-strip .cell {
+    padding: 22px 20px;
+    border-right: 1px solid var(--border-hairline);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .ab-strip .cell:last-child { border-right: 0; }
+  .ab-strip .v {
+    font: 700 26px/1 var(--font-display); color: #fff; letter-spacing: -0.6px;
+  }
+  .ab-strip .v.lime { color: var(--brand-lime); font-family: var(--font-mono); }
+  .ab-strip .k {
+    font: 400 10px/1.4 var(--font-mono); letter-spacing: 1.2px;
+    color: var(--fg-5); text-transform: uppercase;
+  }
+
+  /* Section block */
+  .ab-block { margin: 64px 0 0; display: grid; grid-template-columns: 220px 1fr; gap: 48px; align-items: start; }
+  .ab-block .label {
+    font: 400 10px/1.4 var(--font-mono); letter-spacing: 1.4px;
+    color: var(--fg-5); text-transform: uppercase;
+    padding-top: 6px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .ab-block .label::before {
+    content: ""; width: 6px; height: 6px; border-radius: 999px;
+    background: var(--brand-lime); box-shadow: 0 0 8px var(--brand-lime);
+  }
+  .ab-block h2 {
+    margin: 0 0 14px;
+    font: 700 28px/1.2 var(--font-display); letter-spacing: -0.6px; color: #fff;
+    text-wrap: balance;
+  }
+  .ab-block p {
+    margin: 0 0 14px;
+    font: 400 16px/1.65 var(--font-body); color: var(--fg-2); text-wrap: pretty;
+  }
+  .ab-block p:last-child { margin-bottom: 0; }
+  .ab-block strong { color: #fff; font-weight: 600; }
+
+  /* Principles list */
+  .ab-principles {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+    background: var(--border-hairline);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 14px; overflow: hidden;
+    margin-top: 4px;
+  }
+  .ab-principles .p {
+    background: var(--bg-2); padding: 24px;
+    display: flex; flex-direction: column; gap: 8px;
+    transition: background 220ms var(--ease-out);
+  }
+  .ab-principles .p:hover { background: var(--bg-3); }
+  .ab-principles .p .num {
+    font: 400 11px/1 var(--font-mono); color: var(--brand-lime); letter-spacing: 1px;
+  }
+  .ab-principles .p .t {
+    font: 600 16px/1.3 var(--font-display); color: #fff; letter-spacing: -0.3px;
+  }
+  .ab-principles .p .d {
+    font: 400 13.5px/1.55 var(--font-body); color: var(--fg-3); text-wrap: pretty;
+  }
+
+  /* Team / signature row */
+  .ab-team { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 4px; }
+  .ab-team .person {
+    flex: 1 1 200px;
+    padding: 20px 0; border-top: 1px solid var(--border-hairline);
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .ab-team .person .name {
+    font: 600 15px/1.3 var(--font-display); color: #fff;
+  }
+  .ab-team .person .role {
+    font: 400 11px/1.3 var(--font-mono); letter-spacing: 0.6px; color: var(--fg-5);
+    text-transform: uppercase;
+  }
+  .ab-team .person .bio {
+    margin-top: 4px;
+    font: 400 13px/1.55 var(--font-body); color: var(--fg-3); text-wrap: pretty;
+  }
+
+  /* CTA */
+  .ab-cta {
+    margin-top: 80px; padding: 36px 40px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(201,244,20,0.06), transparent 80%), var(--bg-2);
+    border: 1px solid rgba(201,244,20,0.25);
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  .ab-cta h3 { margin: 0 0 6px; font: 700 22px/1.2 var(--font-display); letter-spacing: -0.4px; color: #fff; }
+  .ab-cta p { margin: 0; font: 400 14px/1.55 var(--font-body); color: var(--fg-3); }
+  .ab-cta a.btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 13px 22px; border-radius: 12px;
+    background: var(--brand-lime); color: #000;
+    font: 700 14px/1 var(--font-body); text-decoration: none;
+    transition: filter 160ms var(--ease-out), transform 160ms var(--ease-out);
+  }
+  .ab-cta a.btn:hover { filter: brightness(1.1); }
+  .ab-cta a.btn:active { transform: scale(0.97); }
+
+  /* Reveal on scroll */
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 760px) {
+    .ab-strip { grid-template-columns: repeat(2, 1fr); }
+    .ab-strip .cell:nth-child(2) { border-right: 0; }
+    .ab-strip .cell:nth-child(1), .ab-strip .cell:nth-child(2) {
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .ab-block { grid-template-columns: 1fr; gap: 16px; }
+    .ab-principles { grid-template-columns: 1fr; }
+    .ab-cta { grid-template-columns: 1fr; padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a class="brand" href="index.html"><span class="dot"></span>AdScout</a>
+  <div class="right">
+    <a href="index.html#dashboard" data-langlink>Dashboard</a>
+    <a href="index.html#how" data-langlink>How it works</a>
+    <a href="index.html#pricing" data-langlink>Pricing</a>
+    <a href="case-studies.html" data-langlink>Case studies</a>
+    <a href="about.html" class="active" data-langlink>About</a>
+    <div class="lang">
+      <button data-set-lang="EN">EN</button>
+      <button data-set-lang="SK">SK</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================== EN ============================== -->
+<main class="ab-shell" data-lang="EN">
+
+  <section class="ab-hero reveal">
+    <div class="legal-eyebrow"><span class="pulse"></span>ABOUT // ADSCOUT</div>
+    <h1>We help marketing teams stop guessing about <em>the competition</em>.</h1>
+    <p class="lede">AdScout is competitive ads intelligence for CMOs and performance leads who plan with real numbers — not screenshots, not gut feel, not whatever the agency sends on Friday.</p>
+  </section>
+
+  <div class="ab-strip reveal">
+    <div class="cell"><span class="v lime">2023</span><span class="k">Founded · Bratislava</span></div>
+    <div class="cell"><span class="v">120+</span><span class="k">Brands tracked</span></div>
+    <div class="cell"><span class="v">€48M</span><span class="k">Competitor spend mapped</span></div>
+    <div class="cell"><span class="v">14</span><span class="k">Markets · CEE &amp; EU</span></div>
+  </div>
+
+  <section class="ab-block reveal">
+    <div class="label">01 / What we do</div>
+    <div>
+      <h2>One dashboard for every dollar your competitors spend.</h2>
+      <p>We continuously index Meta and Google ad activity across your category, normalise it into spend, share-of-voice, and creative patterns, and put it in front of the people who decide where the budget goes.</p>
+      <p>No screenshots. No spreadsheets. No three-week agency turnaround.</p>
+    </div>
+  </section>
+
+  <section class="ab-block reveal">
+    <div class="label">02 / Why we built it</div>
+    <div>
+      <h2>Because &quot;our competitor is doing something&quot; isn&#39;t a strategy.</h2>
+      <p>Our team came out of CEE retail and pharma — categories where one competitor moving budget can swing a quarter. We watched senior marketers make €1M+ decisions on partial data, then defend them in board rooms with the same partial data.</p>
+      <p>AdScout is the tool we wanted on the other side of those meetings.</p>
+    </div>
+  </section>
+
+  <section class="ab-block reveal">
+    <div class="label">03 / What we believe</div>
+    <div>
+      <div class="ab-principles">
+        <div class="p">
+          <span class="num">PRINCIPLE 01</span>
+          <span class="t">Show the number, not the vibe.</span>
+          <span class="d">Every chart traces back to a raw observation. If we can&#39;t source it, we don&#39;t show it.</span>
+        </div>
+        <div class="p">
+          <span class="num">PRINCIPLE 02</span>
+          <span class="t">CMOs read in minutes, not hours.</span>
+          <span class="d">The dashboard is built for a 7-minute Monday review. Depth is one click away — never in your face.</span>
+        </div>
+        <div class="p">
+          <span class="num">PRINCIPLE 03</span>
+          <span class="t">No vanity metrics.</span>
+          <span class="d">If a number doesn&#39;t change a budget decision, it doesn&#39;t belong on the screen.</span>
+        </div>
+        <div class="p">
+          <span class="num">PRINCIPLE 04</span>
+          <span class="t">Privacy is non-negotiable.</span>
+          <span class="d">EU-hosted, GDPR-first, public-data-only. No cookies, fingerprints, or PII — ever.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-block reveal">
+    <div class="label">04 / Team</div>
+    <div>
+      <div class="ab-team">
+        <div class="person">
+          <span class="name">[Founder Name]</span>
+          <span class="role">Co-founder · CEO</span>
+          <span class="bio">15 years in retail marketing across CEE. Tired of bad data.</span>
+        </div>
+        <div class="person">
+          <span class="name">[Founder Name]</span>
+          <span class="role">Co-founder · CTO</span>
+          <span class="bio">Ex-adtech. Built the indexer that powers the platform.</span>
+        </div>
+        <div class="person">
+          <span class="name">[Founder Name]</span>
+          <span class="role">Head of Insight</span>
+          <span class="bio">Ten years agency-side. Translates dashboards into decisions.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-cta reveal">
+    <div>
+      <h3>Want to see it on your category?</h3>
+      <p>30 minutes. Live data. No slides.</p>
+    </div>
+    <a class="btn" href="index.html#cta">Book a demo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <div class="legal-footer" style="margin-top:48px;">
+    <span>© 2026 ADSCOUT INTELLIGENCE</span>
+    <span>
+      <a href="legal/terms.html?lang=EN" data-langlink>Terms</a> &nbsp;·&nbsp;
+      <a href="legal/privacy.html?lang=EN" data-langlink>Privacy</a> &nbsp;·&nbsp;
+      <a href="legal/imprint.html?lang=EN" data-langlink>Imprint</a>
+    </span>
+  </div>
+</main>
+
+<!-- ============================== SK ============================== -->
+<main class="ab-shell" data-lang="SK" style="display:none">
+
+  <section class="ab-hero reveal">
+    <div class="legal-eyebrow"><span class="pulse"></span>O NÁS // ADSCOUT</div>
+    <h1>Pomáhame marketingovým tímom prestať hádať <em>o konkurencii</em>.</h1>
+    <p class="lede">AdScout je competitive ads intelligence pre CMO a performance lídrov, ktorí plánujú s reálnymi číslami — nie so screenshotmi, intuíciou, ani s tým, čo agentúra pošle v piatok.</p>
+  </section>
+
+  <div class="ab-strip reveal">
+    <div class="cell"><span class="v lime">2023</span><span class="k">Založené · Bratislava</span></div>
+    <div class="cell"><span class="v">120+</span><span class="k">Sledovaných značiek</span></div>
+    <div class="cell"><span class="v">€48M</span><span class="k">Zmapovaný spend konkurencie</span></div>
+    <div class="cell"><span class="v">14</span><span class="k">Trhov · CEE &amp; EU</span></div>
+  </div>
+
+  <section class="ab-block reveal">
+    <div class="label">01 / Čo robíme</div>
+    <div>
+      <h2>Jeden dashboard pre každé euro, ktoré minie vaša konkurencia.</h2>
+      <p>Priebežne indexujeme reklamnú aktivitu na Meta a Google v rámci vašej kategórie, normalizujeme ju do spendu, share-of-voice a kreatívnych vzorov, a dávame ju ľuďom, ktorí rozhodujú o budgete.</p>
+      <p>Žiadne screenshoty. Žiadne spreadsheety. Žiadny trojtýždňový agentúrny turnaround.</p>
+    </div>
+  </section>
+
+  <section class="ab-block reveal">
+    <div class="label">02 / Prečo sme to postavili</div>
+    <div>
+      <h2>Pretože „konkurencia niečo robí&quot; nie je stratégia.</h2>
+      <p>Náš tím prišiel z CEE retailu a pharmy — kategórií, kde jeden konkurent presúvajúci budget vie obrátiť kvartál. Sledovali sme, ako seniorní marketéri robia rozhodnutia za €1M+ na neúplných dátach — a potom ich obhajujú v boardroome s tými istými neúplnými dátami.</p>
+      <p>AdScout je nástroj, ktorý sme chceli mať na druhej strane stola.</p>
+    </div>
+  </section>
+
+  <section class="ab-block reveal">
+    <div class="label">03 / Čomu veríme</div>
+    <div>
+      <div class="ab-principles">
+        <div class="p">
+          <span class="num">PRINCÍP 01</span>
+          <span class="t">Ukáž číslo, nie pocit.</span>
+          <span class="d">Každý graf má pôvod v surovom pozorovaní. Ak nevieme zdroj, nezobrazujeme to.</span>
+        </div>
+        <div class="p">
+          <span class="num">PRINCÍP 02</span>
+          <span class="t">CMO čítajú v minútach, nie v hodinách.</span>
+          <span class="d">Dashboard je stavaný na 7-minútový pondelňajší review. Hĺbka je na jeden klik — nikdy v tvári.</span>
+        </div>
+        <div class="p">
+          <span class="num">PRINCÍP 03</span>
+          <span class="t">Žiadne vanity metriky.</span>
+          <span class="d">Ak číslo nemení rozhodnutie o budgete, nepatrí na obrazovku.</span>
+        </div>
+        <div class="p">
+          <span class="num">PRINCÍP 04</span>
+          <span class="t">Súkromie je nediskutovateľné.</span>
+          <span class="d">EU hosting, GDPR-first, len verejné dáta. Žiadne cookies, fingerprinty ani PII.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-block reveal">
+    <div class="label">04 / Tím</div>
+    <div>
+      <div class="ab-team">
+        <div class="person">
+          <span class="name">[Meno zakladateľa]</span>
+          <span class="role">Spoluzakladateľ · CEO</span>
+          <span class="bio">15 rokov v retail marketingu naprieč CEE. Unavený zo zlých dát.</span>
+        </div>
+        <div class="person">
+          <span class="name">[Meno zakladateľa]</span>
+          <span class="role">Spoluzakladateľ · CTO</span>
+          <span class="bio">Ex-adtech. Postavil indexer, ktorý poháňa platformu.</span>
+        </div>
+        <div class="person">
+          <span class="name">[Meno zakladateľa]</span>
+          <span class="role">Head of Insight</span>
+          <span class="bio">Desať rokov agency-side. Prekladá dashboardy do rozhodnutí.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ab-cta reveal">
+    <div>
+      <h3>Chcete to vidieť na vašej kategórii?</h3>
+      <p>30 minút. Živé dáta. Žiadne slidy.</p>
+    </div>
+    <a class="btn" href="index.html#cta">Rezervovať demo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <div class="legal-footer" style="margin-top:48px;">
+    <span>© 2026 ADSCOUT INTELLIGENCE</span>
+    <span>
+      <a href="legal/terms.html?lang=SK" data-langlink>Obchodné podmienky</a> &nbsp;·&nbsp;
+      <a href="legal/privacy.html?lang=SK" data-langlink>Ochrana údajov</a> &nbsp;·&nbsp;
+      <a href="legal/imprint.html?lang=SK" data-langlink>Imprint</a>
+    </span>
+  </div>
+</main>
+
+<script>
+(function () {
+  function paramLang() {
+    var m = location.search.match(/[?&]lang=([A-Za-z]{2})/);
+    return m ? m[1].toUpperCase() : null;
+  }
+  function setLang(lang) {
+    document.querySelectorAll('main[data-lang]').forEach(function (el) {
+      el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+    });
+    document.querySelectorAll('.legal-nav .lang button').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
+    });
+    document.querySelectorAll('a[data-langlink]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      if (href.indexOf('#') === 0) return;
+      var clean = href.replace(/[?&]lang=[A-Za-z]{2}/, '');
+      var sep = clean.indexOf('?') >= 0 ? '&' : '?';
+      a.setAttribute('href', clean + sep + 'lang=' + lang);
+    });
+    try { localStorage.setItem('adscout.lang', lang); } catch (e) {}
+  }
+  var initial = paramLang() || (function () { try { return localStorage.getItem('adscout.lang'); } catch (e) { return null; } })() || 'EN';
+  setLang(initial);
+  document.querySelectorAll('.legal-nav .lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+  });
+
+  // Scroll-reveal
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    if (io) io.observe(el); else el.classList.add('in');
+  });
+})();
+</script>
+</body>
+</html>

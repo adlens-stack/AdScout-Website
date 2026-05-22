@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case studies · AdScout</title>
+<template id="__bundler_thumbnail" data-bg-color="#0a0a0f">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a0a0f"/>
+    <g transform="translate(160 220)">
+      <rect width="360" height="360" rx="24" fill="none" stroke="#c9f414" stroke-width="4"/>
+      <path d="M40 280 L120 220 L200 240 L280 140 L340 80" stroke="#c9f414" stroke-width="6" fill="none"/>
+      <circle cx="340" cy="80" r="10" fill="#c9f414"/>
+    </g>
+    <g transform="translate(640 260)" font-family="monospace" fill="#c9f414">
+      <text font-size="42" font-weight="700" letter-spacing="4">CASE STUDIES</text>
+      <text y="60" font-size="22" opacity="0.6" letter-spacing="3">ADSCOUT</text>
+    </g>
+  </svg>
+</template>
+<link rel="stylesheet" href="legal/legal.css">
+<style>
+  /* ===== Case-studies layout ===== */
+  .cs-shell { max-width: 1120px; margin: 0 auto; padding: 64px 32px 96px; }
+
+  .cs-hero {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center;
+    padding: 24px 0 56px;
+  }
+  .cs-hero h1 {
+    margin: 18px 0 16px;
+    font: 700 clamp(40px, 6vw, 64px)/1.02 var(--font-display);
+    letter-spacing: -2.4px; color: #fff; text-wrap: balance;
+  }
+  .cs-hero p {
+    margin: 0; max-width: 540px;
+    font: 400 17px/1.6 var(--font-body); color: var(--fg-3); text-wrap: pretty;
+  }
+  .cs-hero-meta {
+    margin-top: 28px; padding-top: 24px;
+    border-top: 1px solid var(--border-hairline);
+    display: flex; gap: 32px; flex-wrap: wrap;
+  }
+  .cs-hero-meta .stat {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .cs-hero-meta .stat .v {
+    font: 700 24px/1 var(--font-display); color: #fff; letter-spacing: -0.5px;
+  }
+  .cs-hero-meta .stat .k {
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.2px;
+    color: var(--fg-5); text-transform: uppercase;
+  }
+  .cs-hero-art {
+    position: relative; aspect-ratio: 5 / 4;
+    border-radius: 16px; overflow: hidden;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.45), 0 0 30px rgba(201,244,20,0.06);
+  }
+  .cs-hero-art .grid-bg {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .cs-hero-art .halo {
+    position: absolute; inset: -40px;
+    background: radial-gradient(ellipse at 60% 40%, rgba(201,244,20,0.18), transparent 65%);
+    filter: blur(40px);
+  }
+  .cs-hero-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+
+  /* Filter row */
+  .cs-filter-row {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    padding: 18px 0 32px;
+    border-top: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border-hairline);
+    margin-bottom: 56px;
+    align-items: center;
+  }
+  .cs-filter-row .label {
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px;
+    color: var(--fg-5); text-transform: uppercase; margin-right: 8px;
+  }
+  .cs-chip {
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--bg-2); border: 1px solid var(--border-hairline-strong);
+    font: 500 12px/1 var(--font-body); color: var(--fg-3);
+    cursor: pointer; transition: all 180ms var(--ease-out);
+  }
+  .cs-chip:hover { color: #fff; border-color: var(--brand-lime); }
+  .cs-chip.active { background: var(--brand-lime); color: #000; border-color: var(--brand-lime); font-weight: 600; }
+
+  /* Case grid */
+  .cs-grid { display: flex; flex-direction: column; gap: 32px; }
+
+  .cs-card {
+    display: grid; grid-template-columns: 1fr 1.2fr; gap: 0;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 16px; overflow: hidden;
+    transition: border-color 220ms var(--ease-out), transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+  }
+  .cs-card:hover {
+    border-color: rgba(201,244,20,0.35);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 40px -12px rgba(0,0,0,0.6), 0 0 24px rgba(201,244,20,0.08);
+  }
+  .cs-card.flip { grid-template-columns: 1.2fr 1fr; }
+  .cs-card.flip .cs-card-art { order: 2; }
+  .cs-card.flip .cs-card-body { order: 1; }
+
+  .cs-card-art {
+    position: relative; min-height: 320px;
+    background: var(--bg-3);
+    border-right: 1px solid var(--border-hairline);
+    overflow: hidden;
+  }
+  .cs-card.flip .cs-card-art { border-right: 0; border-left: 1px solid var(--border-hairline); }
+  .cs-card-art .grid-bg {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 18px 18px;
+  }
+  .cs-card-art .halo {
+    position: absolute; inset: -30px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(201,244,20,0.14), transparent 65%);
+    filter: blur(34px);
+  }
+  .cs-card-art .img-slot {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--fg-5);
+    font: 400 10px/1.5 var(--font-mono); letter-spacing: 1.2px;
+    text-transform: uppercase;
+  }
+  .cs-card-art svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  .cs-card-art .industry-tag {
+    position: absolute; top: 16px; left: 16px;
+    padding: 5px 10px; border-radius: 999px;
+    background: rgba(10,10,15,0.7);
+    border: 1px solid var(--border-hairline-strong);
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px; color: var(--fg-3);
+    text-transform: uppercase; backdrop-filter: blur(8px);
+    z-index: 2;
+  }
+
+  .cs-card-body {
+    padding: 32px 32px 28px;
+    display: flex; flex-direction: column; gap: 18px;
+  }
+  .cs-card-meta {
+    display: flex; gap: 14px; align-items: center;
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px;
+    color: var(--fg-5); text-transform: uppercase;
+  }
+  .cs-card-meta .num { color: var(--brand-lime); }
+  .cs-card-meta .sep { width: 18px; height: 1px; background: var(--border-hairline-strong); }
+  .cs-card h2 {
+    margin: 0;
+    font: 700 26px/1.2 var(--font-display); letter-spacing: -0.6px; color: #fff;
+    text-wrap: balance;
+  }
+  .cs-card .lede {
+    margin: 0; font: 400 14.5px/1.6 var(--font-body); color: var(--fg-3); text-wrap: pretty;
+  }
+
+  /* Headline metric ribbon */
+  .cs-metric {
+    display: inline-flex; align-items: baseline; gap: 10px;
+    padding: 12px 16px; border-radius: 10px;
+    background: linear-gradient(180deg, rgba(201,244,20,0.10), rgba(201,244,20,0.03));
+    border: 1px solid rgba(201,244,20,0.30);
+    align-self: flex-start;
+  }
+  .cs-metric .v {
+    font: 700 28px/1 var(--font-mono); color: var(--brand-lime); letter-spacing: -0.6px;
+  }
+  .cs-metric .k {
+    font: 400 11px/1.3 var(--font-mono); letter-spacing: 0.8px; color: var(--fg-3);
+    text-transform: uppercase; max-width: 140px;
+  }
+
+  /* Three-column CAR (Challenge / Action / Result) */
+  .cs-car {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 0; margin-top: 4px;
+    border-top: 1px solid var(--border-hairline);
+    border-bottom: 1px solid var(--border-hairline);
+  }
+  .cs-car .col {
+    padding: 14px 16px 14px 0;
+    border-right: 1px solid var(--border-hairline);
+    display: flex; flex-direction: column; gap: 6px;
+  }
+  .cs-car .col:first-child { padding-left: 0; }
+  .cs-car .col:last-child { border-right: 0; padding-right: 0; }
+  .cs-car .col + .col { padding-left: 16px; }
+  .cs-car .col .label {
+    font: 400 9px/1 var(--font-mono); letter-spacing: 1.4px;
+    color: var(--fg-5); text-transform: uppercase;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .cs-car .col .label::before {
+    content: ""; width: 5px; height: 5px; border-radius: 999px;
+    background: var(--brand-lime); box-shadow: 0 0 6px var(--brand-lime);
+  }
+  .cs-car .col .text {
+    font: 400 13px/1.5 var(--font-body); color: var(--fg-2); text-wrap: pretty;
+  }
+
+  /* Stats strip on the bottom */
+  .cs-stats {
+    display: flex; gap: 28px; flex-wrap: wrap;
+    padding-top: 6px;
+  }
+  .cs-stats .s {
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .cs-stats .s .v {
+    font: 700 18px/1 var(--font-mono); color: #fff; letter-spacing: -0.3px;
+  }
+  .cs-stats .s .v.lime { color: var(--brand-lime); }
+  .cs-stats .s .k {
+    font: 400 9px/1 var(--font-mono); letter-spacing: 1.2px;
+    color: var(--fg-5); text-transform: uppercase;
+  }
+  .cs-stats .s + .s { padding-left: 28px; border-left: 1px solid var(--border-hairline); }
+
+  /* CTA strip at the bottom of the page */
+  .cs-cta {
+    margin-top: 80px; padding: 40px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(201,244,20,0.06), transparent 80%), var(--bg-2);
+    border: 1px solid rgba(201,244,20,0.25);
+    display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: center;
+  }
+  .cs-cta h3 {
+    margin: 0 0 8px;
+    font: 700 26px/1.2 var(--font-display); letter-spacing: -0.5px; color: #fff;
+  }
+  .cs-cta p { margin: 0; font: 400 14px/1.55 var(--font-body); color: var(--fg-3); }
+  .cs-cta a.btn {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 24px; border-radius: 12px;
+    background: var(--brand-lime); color: #000;
+    font: 700 14px/1 var(--font-body);
+    text-decoration: none;
+    transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out);
+  }
+  .cs-cta a.btn:hover { filter: brightness(1.1); }
+  .cs-cta a.btn:active { transform: scale(0.97); }
+
+  /* Reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+  @media (max-width: 880px) {
+    .cs-hero { grid-template-columns: 1fr; gap: 32px; }
+    .cs-hero-art { aspect-ratio: 16/10; }
+    .cs-card, .cs-card.flip { grid-template-columns: 1fr; }
+    .cs-card.flip .cs-card-art { order: 0; }
+    .cs-card.flip .cs-card-body { order: 0; }
+    .cs-card-art { min-height: 220px; border-right: 0; border-bottom: 1px solid var(--border-hairline); }
+    .cs-card.flip .cs-card-art { border-left: 0; border-bottom: 1px solid var(--border-hairline); }
+    .cs-card-body { padding: 24px; }
+    .cs-car { grid-template-columns: 1fr; }
+    .cs-car .col { border-right: 0; border-bottom: 1px solid var(--border-hairline); padding: 12px 0; }
+    .cs-car .col:last-child { border-bottom: 0; }
+    .cs-car .col + .col { padding-left: 0; }
+    .cs-cta { grid-template-columns: 1fr; padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a class="brand" href="index.html"><span class="dot"></span>AdScout</a>
+  <div class="right">
+    <a href="index.html#dashboard" data-langlink>Dashboard</a>
+    <a href="index.html#how" data-langlink>How it works</a>
+    <a href="index.html#pricing" data-langlink>Pricing</a>
+    <a href="case-studies.html" data-page="case-studies" class="active" data-langlink>Case studies</a>
+    <div class="lang">
+      <button data-set-lang="EN">EN</button>
+      <button data-set-lang="SK">SK</button>
+    </div>
+  </div>
+</nav>
+
+<!-- ============================== EN ============================== -->
+<main class="cs-shell" data-lang="EN">
+
+  <section class="cs-hero">
+    <div class="reveal">
+      <div class="legal-eyebrow"><span class="pulse"></span>FIELD NOTES // CASE STUDIES</div>
+      <h1>Six minutes of category truth.<br>Four marketing teams.</h1>
+      <p>Short, structured stories from CMOs who used AdScout to stop guessing — and start moving budget where the data points. Each case is a single decision and the numbers behind it.</p>
+      <div class="cs-hero-meta">
+        <div class="stat"><span class="v">€2.4M</span><span class="k">Re-allocated spend</span></div>
+        <div class="stat"><span class="v">4 days</span><span class="k">Median time to insight</span></div>
+        <div class="stat"><span class="v">3.1×</span><span class="k">Avg. SoV swing</span></div>
+      </div>
+    </div>
+    <div class="cs-hero-art reveal">
+      <div class="halo"></div>
+      <div class="grid-bg"></div>
+      <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet">
+        <!-- Stylised competitor SoV chart -->
+        <defs>
+          <linearGradient id="hg1" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="rgba(201,244,20,0.4)"/>
+            <stop offset="100%" stop-color="rgba(201,244,20,0)"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(40,40)">
+          <line x1="0" x2="320" y1="240" y2="240" stroke="rgba(255,255,255,0.08)"/>
+          <line x1="0" x2="320" y1="180" y2="180" stroke="rgba(255,255,255,0.05)"/>
+          <line x1="0" x2="320" y1="120" y2="120" stroke="rgba(255,255,255,0.05)"/>
+          <line x1="0" x2="320" y1="60"  y2="60"  stroke="rgba(255,255,255,0.05)"/>
+          <path d="M0,180 L40,160 L80,170 L120,130 L160,110 L200,80 L240,60 L280,90 L320,40 L320,240 L0,240 Z" fill="url(#hg1)"/>
+          <path d="M0,180 L40,160 L80,170 L120,130 L160,110 L200,80 L240,60 L280,90 L320,40" stroke="#C9F414" stroke-width="2" fill="none"/>
+          <path d="M0,210 L40,200 L80,205 L120,190 L160,200 L200,170 L240,180 L280,160 L320,150" stroke="rgba(168,85,247,0.7)" stroke-width="1.5" fill="none"/>
+          <path d="M0,220 L40,225 L80,215 L120,210 L160,205 L200,200 L240,190 L280,195 L320,180" stroke="rgba(249,115,22,0.7)" stroke-width="1.5" fill="none"/>
+          <circle cx="320" cy="40" r="4" fill="#C9F414"/>
+          <circle cx="320" cy="40" r="9" fill="none" stroke="rgba(201,244,20,0.5)" stroke-width="1"/>
+        </g>
+        <!-- Mini bars top-right -->
+        <g transform="translate(280,30)">
+          <rect x="0"  y="20" width="10" height="20" rx="2" fill="rgba(201,244,20,0.4)"/>
+          <rect x="14" y="10" width="10" height="30" rx="2" fill="rgba(201,244,20,0.6)"/>
+          <rect x="28" y="0"  width="10" height="40" rx="2" fill="#C9F414"/>
+        </g>
+        <!-- Bottom-left tag -->
+        <g transform="translate(50,260)" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">
+          <text>SOV · 12 MONTHS · LIVE</text>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <div class="cs-filter-row reveal">
+    <span class="label">Filter</span>
+    <button class="cs-chip active">All</button>
+    <button class="cs-chip">Retail</button>
+    <button class="cs-chip">Pharma</button>
+    <button class="cs-chip">QSR</button>
+    <button class="cs-chip">Furniture</button>
+  </div>
+
+  <div class="cs-grid">
+
+    <!-- Case 01 -->
+    <article class="cs-card reveal">
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">Retail · Slovakia</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(30,40)">
+            <!-- Two phases bars -->
+            <text x="0" y="0" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">BEFORE</text>
+            <rect x="0"   y="10" width="100" height="14" rx="2" fill="rgba(201,244,20,0.25)"/>
+            <rect x="0"   y="30" width="160" height="14" rx="2" fill="rgba(168,85,247,0.4)"/>
+            <rect x="0"   y="50" width="200" height="14" rx="2" fill="rgba(249,115,22,0.4)"/>
+
+            <text x="0" y="100" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">AFTER · 60 DAYS</text>
+            <rect x="0" y="110" width="240" height="14" rx="2" fill="#C9F414"/>
+            <rect x="0" y="130" width="120" height="14" rx="2" fill="rgba(168,85,247,0.4)"/>
+            <rect x="0" y="150" width="140" height="14" rx="2" fill="rgba(249,115,22,0.4)"/>
+
+            <!-- Arrow -->
+            <path d="M270,80 L270,110 M260,100 L270,110 L280,100" stroke="#C9F414" stroke-width="2" fill="none"/>
+          </g>
+        </svg>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 01</span><span class="sep"></span><span>Retail · Slovakia</span></div>
+        <h2>From third place to category leader in 60 days.</h2>
+        <p class="lede">A national retailer was outspending Meta but losing share to a competitor's seasonal Display push. AdScout surfaced the gap on day three.</p>
+
+        <div class="cs-metric">
+          <span class="v">+18%</span>
+          <span class="k">SoV in 8 weeks</span>
+        </div>
+
+        <div class="cs-car">
+          <div class="col"><span class="label">Challenge</span><span class="text">Rising spend, flat awareness — internal data gave no answer.</span></div>
+          <div class="col"><span class="label">Action</span><span class="text">Re-allocated 28% of Meta budget into Google Display, matched to a competitor's pattern.</span></div>
+          <div class="col"><span class="label">Result</span><span class="text">Overtook the leader's SoV in week six. Held position through Q4.</span></div>
+        </div>
+
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">€420K</span><span class="k">Spend re-allocated</span></div>
+          <div class="s"><span class="v">+18%</span><span class="k">Share of voice</span></div>
+          <div class="s"><span class="v">3 days</span><span class="k">Time to insight</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 02 -->
+    <article class="cs-card flip reveal">
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 02</span><span class="sep"></span><span>Pharma · CEE</span></div>
+        <h2>A €1.2M creative bet, validated before launch.</h2>
+        <p class="lede">A pharmacy chain wanted to push a wellness sub-brand. AdScout's creative wall showed two competitors had quietly tested — and killed — the same angle six months earlier.</p>
+
+        <div class="cs-metric">
+          <span class="v">€1.2M</span>
+          <span class="k">Avoided wasted spend</span>
+        </div>
+
+        <div class="cs-car">
+          <div class="col"><span class="label">Challenge</span><span class="text">Greenlight a new creative direction with no comparable benchmark.</span></div>
+          <div class="col"><span class="label">Action</span><span class="text">Audited 14 months of competitor creative — found two failed variants.</span></div>
+          <div class="col"><span class="label">Result</span><span class="text">Pivoted to a price-led message; outspend ratio dropped 41%.</span></div>
+        </div>
+
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">−41%</span><span class="k">Cost per qualified lead</span></div>
+          <div class="s"><span class="v">14 mo.</span><span class="k">Of competitor history reviewed</span></div>
+          <div class="s"><span class="v">2</span><span class="k">Failed angles ruled out</span></div>
+        </div>
+      </div>
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">Pharma · CEE</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <!-- Creative wall grid -->
+          <g transform="translate(30,30)">
+            <rect x="0"   y="0"   width="80" height="100" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="100" y="0"   width="80" height="100" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="200" y="0"   width="80" height="100" rx="6" fill="rgba(239,68,68,0.10)" stroke="rgba(239,68,68,0.5)"/>
+            <line x1="210" y1="10" x2="270" y2="90" stroke="#EF4444" stroke-width="1.5"/>
+            <line x1="270" y1="10" x2="210" y2="90" stroke="#EF4444" stroke-width="1.5"/>
+
+            <rect x="0"   y="120" width="80" height="100" rx="6" fill="rgba(239,68,68,0.10)" stroke="rgba(239,68,68,0.5)"/>
+            <line x1="10"  y1="130" x2="70" y2="210" stroke="#EF4444" stroke-width="1.5"/>
+            <line x1="70"  y1="130" x2="10" y2="210" stroke="#EF4444" stroke-width="1.5"/>
+
+            <rect x="100" y="120" width="80" height="100" rx="6" fill="rgba(201,244,20,0.10)" stroke="rgba(201,244,20,0.6)"/>
+            <path d="M110,170 L130,190 L170,140" stroke="#C9F414" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+            <rect x="200" y="120" width="80" height="100" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+          </g>
+          <text x="30" y="280" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">CREATIVE WALL · WELLNESS · 14 MONTHS</text>
+        </svg>
+      </div>
+    </article>
+
+    <!-- Case 03 -->
+    <article class="cs-card reveal">
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">QSR · Slovakia</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <!-- Seasonal line w/ peak -->
+          <g transform="translate(30,40)">
+            <path d="M0,180 L30,170 L60,160 L90,150 L120,170 L150,165 L180,80 L210,100 L240,120 L270,140 L300,150" stroke="#C9F414" stroke-width="2" fill="none"/>
+            <circle cx="180" cy="80" r="6" fill="#C9F414"/>
+            <circle cx="180" cy="80" r="14" fill="none" stroke="rgba(201,244,20,0.4)" stroke-width="1">
+              <animate attributeName="r" values="6;18;6" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <text x="180" y="60" text-anchor="middle" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="10">PEAK · JUL</text>
+            <text x="0"   y="220" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9">JAN</text>
+            <text x="295" y="220" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9">DEC</text>
+          </g>
+        </svg>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 03</span><span class="sep"></span><span>QSR · Slovakia</span></div>
+        <h2>Caught a competitor's seasonal window before it opened.</h2>
+        <p class="lede">A QSR chain spotted a competitor escalating Meta spend by +233% three weeks earlier than last year. They moved their summer launch up by 14 days.</p>
+
+        <div class="cs-metric">
+          <span class="v">+22%</span>
+          <span class="k">Reach uplift in launch window</span>
+        </div>
+
+        <div class="cs-car">
+          <div class="col"><span class="label">Challenge</span><span class="text">Annual summer push; no early signal on competitor timing.</span></div>
+          <div class="col"><span class="label">Action</span><span class="text">Set an alert at +25% MoM spend; triggered on day 9 of June.</span></div>
+          <div class="col"><span class="label">Result</span><span class="text">Launched two weeks early. Owned the first 18 days uncontested.</span></div>
+        </div>
+
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">+22%</span><span class="k">Reach uplift</span></div>
+          <div class="s"><span class="v">14 days</span><span class="k">Earlier launch</span></div>
+          <div class="s"><span class="v">+233%</span><span class="k">Competitor MoM detected</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case 04 -->
+    <article class="cs-card flip reveal">
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 04</span><span class="sep"></span><span>Furniture · Nordics</span></div>
+        <h2>Killed a quarter of paid spend without losing reach.</h2>
+        <p class="lede">A furniture retailer was paying for keywords its top competitor wasn't even bidding on. AdScout's overlap matrix made the waste obvious in one screen.</p>
+
+        <div class="cs-metric">
+          <span class="v">−24%</span>
+          <span class="k">Spend, same reach</span>
+        </div>
+
+        <div class="cs-car">
+          <div class="col"><span class="label">Challenge</span><span class="text">Plateaued conversions; CFO asking where the next 10% efficiency comes from.</span></div>
+          <div class="col"><span class="label">Action</span><span class="text">Cut 23% of Search keywords with zero competitive overlap and low intent.</span></div>
+          <div class="col"><span class="label">Result</span><span class="text">Reach held flat. Cost-per-acquisition fell 31% in Q2.</span></div>
+        </div>
+
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">−24%</span><span class="k">Total spend</span></div>
+          <div class="s"><span class="v">−31%</span><span class="k">Cost per acquisition</span></div>
+          <div class="s"><span class="v">0%</span><span class="k">Reach loss</span></div>
+        </div>
+      </div>
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">Furniture · Nordics</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <!-- Venn-ish overlap -->
+          <g transform="translate(180,160)">
+            <circle r="80" cx="-40" cy="0" fill="rgba(201,244,20,0.10)" stroke="rgba(201,244,20,0.5)" stroke-width="1.5"/>
+            <circle r="80" cx="40"  cy="0" fill="rgba(168,85,247,0.10)" stroke="rgba(168,85,247,0.5)" stroke-width="1.5"/>
+            <text x="-90" y="-90" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1">OUR KW</text>
+            <text x="60"  y="-90" fill="#A855F7" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1">COMPETITOR</text>
+            <text x="0"   y="4"   text-anchor="middle" fill="#fff" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">76%</text>
+            <text x="0"   y="22"  text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">OVERLAP</text>
+            <text x="-90" y="6"   text-anchor="middle" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="11">23%</text>
+            <text x="90"  y="6"   text-anchor="middle" fill="#A855F7" font-family="JetBrains Mono, monospace" font-size="11">14%</text>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="cs-cta reveal">
+    <div>
+      <h3>Want a case study tailored to your category?</h3>
+      <p>We&#39;ll pull live data on your top 5 competitors and walk you through it — usually in under 30 minutes.</p>
+    </div>
+    <a class="btn" href="index.html#cta">Book a 30-min demo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <div class="legal-footer" style="margin-top:48px;">
+    <span>© 2026 ADSCOUT INTELLIGENCE</span>
+    <span>
+      <a href="legal/terms.html?lang=EN" data-langlink>Terms</a> &nbsp;·&nbsp;
+      <a href="legal/privacy.html?lang=EN" data-langlink>Privacy</a> &nbsp;·&nbsp;
+      <a href="legal/imprint.html?lang=EN" data-langlink>Imprint</a>
+    </span>
+  </div>
+</main>
+
+<!-- ============================== SK ============================== -->
+<main class="cs-shell" data-lang="SK" style="display:none">
+
+  <section class="cs-hero">
+    <div class="reveal">
+      <div class="legal-eyebrow"><span class="pulse"></span>POZNÁMKY Z PRAXE // CASE STUDIES</div>
+      <h1>Šesť minút pravdy o vašej kategórii.<br>Štyri marketingové tímy.</h1>
+      <p>Krátke, štruktúrované príbehy CMO, ktorí prestali hádať a začali presúvať budget tam, kam ukazujú dáta. Každá štúdia je o jednom rozhodnutí — a o číslach, ktoré ho podporili.</p>
+      <div class="cs-hero-meta">
+        <div class="stat"><span class="v">€2.4M</span><span class="k">Presmerovaného rozpočtu</span></div>
+        <div class="stat"><span class="v">4 dni</span><span class="k">Medián času k insightu</span></div>
+        <div class="stat"><span class="v">3.1×</span><span class="k">Priemerný posun SoV</span></div>
+      </div>
+    </div>
+    <div class="cs-hero-art reveal">
+      <div class="halo"></div>
+      <div class="grid-bg"></div>
+      <svg viewBox="0 0 400 320" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <linearGradient id="hg2" x1="0" x2="0" y1="0" y2="1">
+            <stop offset="0%" stop-color="rgba(201,244,20,0.4)"/>
+            <stop offset="100%" stop-color="rgba(201,244,20,0)"/>
+          </linearGradient>
+        </defs>
+        <g transform="translate(40,40)">
+          <line x1="0" x2="320" y1="240" y2="240" stroke="rgba(255,255,255,0.08)"/>
+          <line x1="0" x2="320" y1="180" y2="180" stroke="rgba(255,255,255,0.05)"/>
+          <line x1="0" x2="320" y1="120" y2="120" stroke="rgba(255,255,255,0.05)"/>
+          <line x1="0" x2="320" y1="60"  y2="60"  stroke="rgba(255,255,255,0.05)"/>
+          <path d="M0,180 L40,160 L80,170 L120,130 L160,110 L200,80 L240,60 L280,90 L320,40 L320,240 L0,240 Z" fill="url(#hg2)"/>
+          <path d="M0,180 L40,160 L80,170 L120,130 L160,110 L200,80 L240,60 L280,90 L320,40" stroke="#C9F414" stroke-width="2" fill="none"/>
+          <path d="M0,210 L40,200 L80,205 L120,190 L160,200 L200,170 L240,180 L280,160 L320,150" stroke="rgba(168,85,247,0.7)" stroke-width="1.5" fill="none"/>
+          <path d="M0,220 L40,225 L80,215 L120,210 L160,205 L200,200 L240,190 L280,195 L320,180" stroke="rgba(249,115,22,0.7)" stroke-width="1.5" fill="none"/>
+          <circle cx="320" cy="40" r="4" fill="#C9F414"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <div class="cs-filter-row reveal">
+    <span class="label">Filter</span>
+    <button class="cs-chip active">Všetky</button>
+    <button class="cs-chip">Retail</button>
+    <button class="cs-chip">Pharma</button>
+    <button class="cs-chip">QSR</button>
+    <button class="cs-chip">Nábytok</button>
+  </div>
+
+  <div class="cs-grid">
+
+    <article class="cs-card reveal">
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">Retail · Slovensko</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(30,40)">
+            <text x="0" y="0" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">PRED</text>
+            <rect x="0" y="10" width="100" height="14" rx="2" fill="rgba(201,244,20,0.25)"/>
+            <rect x="0" y="30" width="160" height="14" rx="2" fill="rgba(168,85,247,0.4)"/>
+            <rect x="0" y="50" width="200" height="14" rx="2" fill="rgba(249,115,22,0.4)"/>
+            <text x="0" y="100" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">PO · 60 DNÍ</text>
+            <rect x="0" y="110" width="240" height="14" rx="2" fill="#C9F414"/>
+            <rect x="0" y="130" width="120" height="14" rx="2" fill="rgba(168,85,247,0.4)"/>
+            <rect x="0" y="150" width="140" height="14" rx="2" fill="rgba(249,115,22,0.4)"/>
+            <path d="M270,80 L270,110 M260,100 L270,110 L280,100" stroke="#C9F414" stroke-width="2" fill="none"/>
+          </g>
+        </svg>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 01</span><span class="sep"></span><span>Retail · Slovensko</span></div>
+        <h2>Z tretieho miesta na lídra kategórie za 60 dní.</h2>
+        <p class="lede">Národný retailer prevyšoval konkurenciu v Meta spende, ale strácal podiel kvôli sezónnemu Display tlaku. AdScout odhalil rozdiel na tretí deň.</p>
+        <div class="cs-metric"><span class="v">+18%</span><span class="k">SoV za 8 týždňov</span></div>
+        <div class="cs-car">
+          <div class="col"><span class="label">Výzva</span><span class="text">Rastúci budget, plochá awareness — interné dáta neodpovedali.</span></div>
+          <div class="col"><span class="label">Akcia</span><span class="text">Presunutých 28% Meta budgetu do Google Display, podľa konkurenčného vzoru.</span></div>
+          <div class="col"><span class="label">Výsledok</span><span class="text">Predbehnutie lídra v 6. týždni. Pozícia udržaná počas Q4.</span></div>
+        </div>
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">€420K</span><span class="k">Presunutý budget</span></div>
+          <div class="s"><span class="v">+18%</span><span class="k">Share of voice</span></div>
+          <div class="s"><span class="v">3 dni</span><span class="k">Čas k insightu</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="cs-card flip reveal">
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 02</span><span class="sep"></span><span>Pharma · CEE</span></div>
+        <h2>Stávka €1.2M na kreatívu, overená pred launchom.</h2>
+        <p class="lede">Lekárenský reťazec chcel rozbehnúť wellness pod-značku. Creative wall ukázal, že dvaja konkurenti pred pol rokom rovnaký uhol potichu vyskúšali — a zabili.</p>
+        <div class="cs-metric"><span class="v">€1.2M</span><span class="k">Ušetreného plytvania</span></div>
+        <div class="cs-car">
+          <div class="col"><span class="label">Výzva</span><span class="text">Schváliť nový kreatívny smer bez porovnateľného benchmarku.</span></div>
+          <div class="col"><span class="label">Akcia</span><span class="text">Audit 14 mesiacov konkurenčnej kreatívy — odhalené dva neúspešné varianty.</span></div>
+          <div class="col"><span class="label">Výsledok</span><span class="text">Pivot na cenovo orientovaný message; outspend pomer −41%.</span></div>
+        </div>
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">−41%</span><span class="k">Cena za kvalifikovaný lead</span></div>
+          <div class="s"><span class="v">14 mes.</span><span class="k">Histórie konkurencie</span></div>
+          <div class="s"><span class="v">2</span><span class="k">Vyradené uhly</span></div>
+        </div>
+      </div>
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">Pharma · CEE</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(30,30)">
+            <rect x="0" y="0" width="80" height="100" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="100" y="0" width="80" height="100" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+            <rect x="200" y="0" width="80" height="100" rx="6" fill="rgba(239,68,68,0.10)" stroke="rgba(239,68,68,0.5)"/>
+            <line x1="210" y1="10" x2="270" y2="90" stroke="#EF4444" stroke-width="1.5"/>
+            <line x1="270" y1="10" x2="210" y2="90" stroke="#EF4444" stroke-width="1.5"/>
+            <rect x="0" y="120" width="80" height="100" rx="6" fill="rgba(239,68,68,0.10)" stroke="rgba(239,68,68,0.5)"/>
+            <line x1="10" y1="130" x2="70" y2="210" stroke="#EF4444" stroke-width="1.5"/>
+            <line x1="70" y1="130" x2="10" y2="210" stroke="#EF4444" stroke-width="1.5"/>
+            <rect x="100" y="120" width="80" height="100" rx="6" fill="rgba(201,244,20,0.10)" stroke="rgba(201,244,20,0.6)"/>
+            <path d="M110,170 L130,190 L170,140" stroke="#C9F414" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            <rect x="200" y="120" width="80" height="100" rx="6" fill="rgba(255,255,255,0.04)" stroke="rgba(255,255,255,0.08)"/>
+          </g>
+          <text x="30" y="280" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">CREATIVE WALL · WELLNESS · 14 MES.</text>
+        </svg>
+      </div>
+    </article>
+
+    <article class="cs-card reveal">
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">QSR · Slovensko</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(30,40)">
+            <path d="M0,180 L30,170 L60,160 L90,150 L120,170 L150,165 L180,80 L210,100 L240,120 L270,140 L300,150" stroke="#C9F414" stroke-width="2" fill="none"/>
+            <circle cx="180" cy="80" r="6" fill="#C9F414"/>
+            <circle cx="180" cy="80" r="14" fill="none" stroke="rgba(201,244,20,0.4)" stroke-width="1">
+              <animate attributeName="r" values="6;18;6" dur="2s" repeatCount="indefinite"/>
+              <animate attributeName="opacity" values="1;0;1" dur="2s" repeatCount="indefinite"/>
+            </circle>
+            <text x="180" y="60" text-anchor="middle" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="10">VRCHOL · JÚL</text>
+            <text x="0" y="220" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9">JAN</text>
+            <text x="295" y="220" fill="#64748B" font-family="JetBrains Mono, monospace" font-size="9">DEC</text>
+          </g>
+        </svg>
+      </div>
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 03</span><span class="sep"></span><span>QSR · Slovensko</span></div>
+        <h2>Sezónne okno konkurencie zachytené skôr, než sa otvorilo.</h2>
+        <p class="lede">QSR reťazec zachytil, že konkurent eskaloval Meta spend o +233% — tri týždne skôr ako vlani. Letný launch posunuli o 14 dní vpred.</p>
+        <div class="cs-metric"><span class="v">+22%</span><span class="k">Reach uplift v okne launchu</span></div>
+        <div class="cs-car">
+          <div class="col"><span class="label">Výzva</span><span class="text">Ročný letný push; žiadny skorý signál o timingu konkurencie.</span></div>
+          <div class="col"><span class="label">Akcia</span><span class="text">Alert na +25% MoM spend; spustený 9. dňa júna.</span></div>
+          <div class="col"><span class="label">Výsledok</span><span class="text">Launch o dva týždne skôr. Prvých 18 dní bez konkurencie.</span></div>
+        </div>
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">+22%</span><span class="k">Reach uplift</span></div>
+          <div class="s"><span class="v">14 dní</span><span class="k">Skorší launch</span></div>
+          <div class="s"><span class="v">+233%</span><span class="k">MoM konkurencie</span></div>
+        </div>
+      </div>
+    </article>
+
+    <article class="cs-card flip reveal">
+      <div class="cs-card-body">
+        <div class="cs-card-meta"><span class="num">CASE 04</span><span class="sep"></span><span>Nábytok · Severná Európa</span></div>
+        <h2>Štvrtina paid budgetu zoškrtnutá bez straty reachu.</h2>
+        <p class="lede">Predajca nábytku platil za kľúčové slová, na ktoré jeho hlavný konkurent ani neútočil. Overlap matica AdScoutu ukázala plytvanie na jednej obrazovke.</p>
+        <div class="cs-metric"><span class="v">−24%</span><span class="k">Spend, rovnaký reach</span></div>
+        <div class="cs-car">
+          <div class="col"><span class="label">Výzva</span><span class="text">Plató v konverziách; CFO sa pýta, odkiaľ ďalších 10% efektivity.</span></div>
+          <div class="col"><span class="label">Akcia</span><span class="text">Vyradených 23% Search keywordov bez konkurenčného overlapu a s nízkym intentom.</span></div>
+          <div class="col"><span class="label">Výsledok</span><span class="text">Reach plochý. Cena za akvizíciu klesla o 31% v Q2.</span></div>
+        </div>
+        <div class="cs-stats">
+          <div class="s"><span class="v lime">−24%</span><span class="k">Celkový spend</span></div>
+          <div class="s"><span class="v">−31%</span><span class="k">Cena za akvizíciu</span></div>
+          <div class="s"><span class="v">0%</span><span class="k">Strata reachu</span></div>
+        </div>
+      </div>
+      <div class="cs-card-art">
+        <div class="halo"></div>
+        <div class="grid-bg"></div>
+        <span class="industry-tag">Nábytok · Severná Európa</span>
+        <svg viewBox="0 0 360 320" preserveAspectRatio="xMidYMid meet">
+          <g transform="translate(180,160)">
+            <circle r="80" cx="-40" cy="0" fill="rgba(201,244,20,0.10)" stroke="rgba(201,244,20,0.5)" stroke-width="1.5"/>
+            <circle r="80" cx="40"  cy="0" fill="rgba(168,85,247,0.10)" stroke="rgba(168,85,247,0.5)" stroke-width="1.5"/>
+            <text x="-90" y="-90" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1">NAŠE KW</text>
+            <text x="60"  y="-90" fill="#A855F7" font-family="JetBrains Mono, monospace" font-size="10" letter-spacing="1">KONKURENT</text>
+            <text x="0"   y="4"   text-anchor="middle" fill="#fff" font-family="JetBrains Mono, monospace" font-size="14" font-weight="700">76%</text>
+            <text x="0"   y="22"  text-anchor="middle" fill="#94A3B8" font-family="JetBrains Mono, monospace" font-size="9" letter-spacing="1">OVERLAP</text>
+            <text x="-90" y="6"   text-anchor="middle" fill="#C9F414" font-family="JetBrains Mono, monospace" font-size="11">23%</text>
+            <text x="90"  y="6"   text-anchor="middle" fill="#A855F7" font-family="JetBrains Mono, monospace" font-size="11">14%</text>
+          </g>
+        </svg>
+      </div>
+    </article>
+
+  </div>
+
+  <section class="cs-cta reveal">
+    <div>
+      <h3>Chcete case study na mieru pre vašu kategóriu?</h3>
+      <p>Stiahneme živé dáta na vašich top 5 konkurentov a prejdeme si ich s vami — väčšinou pod 30 minút.</p>
+    </div>
+    <a class="btn" href="index.html#cta">Rezervovať 30-min demo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+  </section>
+
+  <div class="legal-footer" style="margin-top:48px;">
+    <span>© 2026 ADSCOUT INTELLIGENCE</span>
+    <span>
+      <a href="legal/terms.html?lang=SK" data-langlink>Obchodné podmienky</a> &nbsp;·&nbsp;
+      <a href="legal/privacy.html?lang=SK" data-langlink>Ochrana údajov</a> &nbsp;·&nbsp;
+      <a href="legal/imprint.html?lang=SK" data-langlink>Imprint</a>
+    </span>
+  </div>
+</main>
+
+<script>
+(function () {
+  // Lang switching (mirrors legal-shell)
+  function paramLang() {
+    var m = location.search.match(/[?&]lang=([A-Za-z]{2})/);
+    return m ? m[1].toUpperCase() : null;
+  }
+  function setLang(lang) {
+    document.querySelectorAll('main[data-lang]').forEach(function (el) {
+      el.style.display = el.getAttribute('data-lang') === lang ? '' : 'none';
+    });
+    document.querySelectorAll('.legal-nav .lang button').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-set-lang') === lang);
+    });
+    document.querySelectorAll('a[data-langlink]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      var clean = href.replace(/[?&]lang=[A-Za-z]{2}/, '');
+      var sep = clean.indexOf('?') >= 0 ? '&' : '?';
+      // Don't append lang to in-page anchors only
+      if (clean.indexOf('#') === 0) return;
+      a.setAttribute('href', clean + sep + 'lang=' + lang);
+    });
+    try { localStorage.setItem('adscout.lang', lang); } catch (e) {}
+  }
+  var initial = paramLang() || (function () { try { return localStorage.getItem('adscout.lang'); } catch (e) { return null; } })() || 'EN';
+  setLang(initial);
+  document.querySelectorAll('.legal-nav .lang button').forEach(function (b) {
+    b.addEventListener('click', function () { setLang(b.getAttribute('data-set-lang')); });
+  });
+
+  // Scroll-reveal
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    if (io) io.observe(el); else el.classList.add('in');
+  });
+
+  // Filter chips (visual only — all cases show)
+  document.querySelectorAll('.cs-filter-row').forEach(function (row) {
+    row.querySelectorAll('.cs-chip').forEach(function (b) {
+      b.addEventListener('click', function () {
+        row.querySelectorAll('.cs-chip').forEach(function (x) { x.classList.remove('active'); });
+        b.classList.add('active');
+      });
+    });
+  });
+})();
+</script>
+</body>
+</html>

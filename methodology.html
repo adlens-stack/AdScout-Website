@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methodology · AdScout</title>
+<template id="__bundler_thumbnail" data-bg-color="#0a0a0f">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#0a0a0f"/>
+    <g transform="translate(220 220)">
+      <rect x="0"   y="0"   width="360" height="60" rx="8" fill="none" stroke="#c9f414" stroke-width="3" opacity="0.35"/>
+      <rect x="20"  y="80"  width="360" height="60" rx="8" fill="none" stroke="#c9f414" stroke-width="3" opacity="0.55"/>
+      <rect x="40"  y="160" width="360" height="60" rx="8" fill="none" stroke="#c9f414" stroke-width="3" opacity="0.75"/>
+      <rect x="60"  y="240" width="360" height="60" rx="8" fill="#c9f414" opacity="0.92"/>
+    </g>
+    <g transform="translate(720 360)" font-family="monospace" fill="#c9f414">
+      <text font-size="42" font-weight="700" letter-spacing="4">METHODOLOGY</text>
+      <text y="56" font-size="20" opacity="0.6" letter-spacing="3">ADSCOUT</text>
+    </g>
+  </svg>
+</template>
+<link rel="stylesheet" href="legal/legal.css">
+<style>
+  /* ContactModal dependencies — keyframes + .btn-reset */
+  @keyframes fadeInUp { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+  @keyframes pulse    { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+  @keyframes blink    { 50% { opacity: 0; } }
+  @keyframes dashFade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .btn-reset { border: 0; background: none; cursor: pointer; font: inherit; color: inherit; padding: 0; }
+</style>
+<style>
+  /* ============================================================
+     Methodology page — built on the legal-nav / shell pattern
+     ============================================================ */
+  .mt-shell { max-width: 1120px; margin: 0 auto; padding: 56px 32px 96px; }
+
+  /* ---------- HERO ---------- */
+  .mt-hero {
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 56px; align-items: center;
+    padding: 24px 0 64px;
+  }
+  .mt-hero h1 {
+    margin: 18px 0 18px;
+    font: 700 clamp(38px, 5.4vw, 60px)/1.05 var(--font-display);
+    letter-spacing: -2.4px; color: #fff; text-wrap: balance;
+  }
+  .mt-hero h1 em {
+    font-style: normal; color: var(--brand-lime);
+    font-family: var(--font-display);
+  }
+  .mt-hero p.lede {
+    margin: 0; max-width: 560px;
+    font: 400 17px/1.65 var(--font-body); color: var(--fg-3); text-wrap: pretty;
+  }
+  .mt-hero-meta {
+    margin-top: 28px; padding-top: 22px;
+    border-top: 1px solid var(--border-hairline);
+    display: flex; gap: 36px; flex-wrap: wrap;
+  }
+  .mt-hero-meta .stat { display: flex; flex-direction: column; gap: 4px; }
+  .mt-hero-meta .stat .v { font: 700 22px/1 var(--font-display); color: #fff; letter-spacing: -0.5px; }
+  .mt-hero-meta .stat .k { font: 400 10px/1.3 var(--font-mono); letter-spacing: 1.2px; color: var(--fg-5); text-transform: uppercase; max-width: 160px; }
+
+  .mt-hero-art {
+    position: relative; aspect-ratio: 5 / 4;
+    border-radius: 16px; overflow: hidden;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    box-shadow: 0 25px 50px -12px rgba(0,0,0,0.45), 0 0 30px rgba(201,244,20,0.06);
+  }
+  .mt-hero-art .grid-bg {
+    position: absolute; inset: 0;
+    background-image: radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    background-size: 20px 20px;
+  }
+  .mt-hero-art .halo {
+    position: absolute; inset: -40px;
+    background: radial-gradient(ellipse at 60% 40%, rgba(201,244,20,0.18), transparent 65%);
+    filter: blur(40px);
+  }
+  .mt-hero-art .layers {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; justify-content: center;
+    gap: 14px; padding: 56px 48px;
+  }
+  .mt-hero-art .layer {
+    height: 38px; border-radius: 6px;
+    border: 1px solid rgba(201,244,20,0.22);
+    background: linear-gradient(90deg, rgba(201,244,20,0.06), rgba(201,244,20,0.02));
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 14px;
+    font: 500 10px/1 var(--font-mono); letter-spacing: 1.4px; text-transform: uppercase;
+    color: var(--fg-3);
+    transform-origin: left center;
+    animation: layer-rise 700ms var(--ease-out) both;
+  }
+  .mt-hero-art .layer:nth-child(1) { animation-delay: 80ms;  margin-left: 0; width: 88%; }
+  .mt-hero-art .layer:nth-child(2) { animation-delay: 220ms; margin-left: 24px; width: 78%; }
+  .mt-hero-art .layer:nth-child(3) { animation-delay: 360ms; margin-left: 48px; width: 68%; }
+  .mt-hero-art .layer:nth-child(4) {
+    animation-delay: 500ms; margin-left: 72px; width: 58%;
+    background: linear-gradient(90deg, rgba(201,244,20,0.20), rgba(201,244,20,0.05));
+    border-color: var(--brand-lime);
+    color: var(--brand-lime);
+    box-shadow: 0 0 18px rgba(201,244,20,0.20);
+  }
+  .mt-hero-art .layer .v { color: var(--brand-lime); font-weight: 700; }
+  .mt-hero-art .layer:nth-child(4) .v { color: #000; background: var(--brand-lime); padding: 4px 8px; border-radius: 4px; }
+  .mt-hero-art .stamp {
+    position: absolute; top: 16px; left: 16px;
+    padding: 6px 10px; border-radius: 999px;
+    background: rgba(10,10,15,0.7);
+    border: 1px solid var(--border-hairline-strong);
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px; color: var(--fg-3);
+    text-transform: uppercase; backdrop-filter: blur(8px);
+    display: flex; align-items: center; gap: 8px;
+  }
+  .mt-hero-art .stamp .pulse {
+    width: 6px; height: 6px; border-radius: 999px; background: var(--brand-lime);
+    box-shadow: 0 0 8px var(--brand-lime);
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+
+  @keyframes layer-rise {
+    from { opacity: 0; transform: translateY(8px) scaleX(0.92); }
+    to   { opacity: 1; transform: none; }
+  }
+  @keyframes pulse-dot { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+
+  /* ---------- SECTION ---------- */
+  .mt-section { padding: 56px 0; border-top: 1px solid var(--border-hairline); }
+  .mt-section .sec-label {
+    display: inline-flex; align-items: center; gap: 10px;
+    font: 400 11px/1 var(--font-mono); letter-spacing: 1.6px;
+    color: var(--brand-lime); text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .mt-section .sec-label .bar { width: 22px; height: 1px; background: var(--brand-lime); }
+  .mt-section h2 {
+    margin: 0 0 18px;
+    font: 700 clamp(28px, 3.4vw, 40px)/1.15 var(--font-display);
+    letter-spacing: -1.2px; color: #fff; text-wrap: balance;
+    max-width: 760px;
+  }
+  .mt-section p.body, .mt-section .body p {
+    margin: 10px 0; max-width: 760px;
+    font: 400 15.5px/1.7 var(--font-body); color: var(--fg-2); text-wrap: pretty;
+  }
+  .mt-section p.body.muted { color: var(--fg-3); }
+  .mt-section strong { color: #fff; font-weight: 600; }
+
+  /* ---------- DATA SOURCE CARDS (Block 2) ---------- */
+  .mt-sources {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    margin: 32px 0 24px;
+  }
+  .mt-source {
+    position: relative; padding: 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 14px;
+    display: flex; flex-direction: column; gap: 16px;
+    overflow: hidden;
+  }
+  .mt-source::after {
+    content: ""; position: absolute; right: -60px; top: -60px;
+    width: 200px; height: 200px; border-radius: 999px;
+    background: radial-gradient(circle, rgba(201,244,20,0.10), transparent 70%);
+    pointer-events: none;
+  }
+  .mt-source .tag {
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px;
+    color: var(--fg-5); text-transform: uppercase;
+  }
+  .mt-source h3 {
+    margin: 0; font: 700 22px/1.25 var(--font-display);
+    letter-spacing: -0.4px; color: #fff;
+    display: flex; align-items: center; gap: 12px;
+  }
+  .mt-source .swatch {
+    width: 28px; height: 28px; border-radius: 6px; flex: 0 0 28px;
+    display: grid; place-items: center;
+    font: 700 14px/1 var(--font-display);
+  }
+  .mt-source .swatch.meta { background: rgba(59,130,246,0.16); color: #60A5FA; border: 1px solid rgba(59,130,246,0.4); }
+  .mt-source .swatch.google { background: rgba(236,72,153,0.12); color: #EC4899; border: 1px solid rgba(236,72,153,0.4); }
+  .mt-source p {
+    margin: 0; font: 400 14px/1.6 var(--font-body); color: var(--fg-3);
+  }
+  .mt-source ul {
+    margin: 0; padding: 0; list-style: none;
+    display: grid; gap: 6px;
+  }
+  .mt-source ul li {
+    font: 400 12.5px/1.5 var(--font-mono); color: var(--fg-2);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .mt-source ul li::before {
+    content: ""; width: 5px; height: 5px; border-radius: 999px;
+    background: var(--brand-lime); transform: translateY(-2px);
+  }
+  .mt-source .req {
+    margin-top: auto; padding-top: 14px;
+    border-top: 1px solid var(--border-hairline);
+    font: 400 11px/1.5 var(--font-mono); letter-spacing: 0.8px;
+    color: var(--fg-4); text-transform: uppercase;
+  }
+
+  .mt-noaccess {
+    margin: 18px 0 0; padding: 18px 22px;
+    background: var(--bg-1);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 12px;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0;
+  }
+  .mt-noaccess .item { padding: 6px 18px; border-right: 1px solid var(--border-hairline); display: flex; flex-direction: column; gap: 4px; }
+  .mt-noaccess .item:first-child { padding-left: 0; }
+  .mt-noaccess .item:last-child { border-right: 0; padding-right: 0; }
+  .mt-noaccess .item .x {
+    font: 700 18px/1 var(--font-mono); color: #EF4444;
+  }
+  .mt-noaccess .item .k {
+    font: 400 11px/1.4 var(--font-body); color: var(--fg-3);
+  }
+
+  /* Pull quote */
+  .mt-quote {
+    margin: 32px 0 0;
+    padding: 24px 28px 24px 32px;
+    background: linear-gradient(180deg, rgba(201,244,20,0.05), transparent 80%);
+    border-left: 2px solid var(--brand-lime);
+    border-radius: 4px;
+  }
+  .mt-quote p {
+    margin: 0; font: 500 18px/1.55 var(--font-display); letter-spacing: -0.3px;
+    color: #fff; text-wrap: balance; max-width: 760px;
+  }
+  .mt-quote p::before { content: "“"; color: var(--brand-lime); margin-right: 4px; font-size: 1.2em; }
+  .mt-quote p::after  { content: "”"; color: var(--brand-lime); margin-left: 2px; font-size: 1.2em; }
+
+  /* ---------- LAYERS (Block 3) ---------- */
+  .mt-layers { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+  .mt-layer {
+    display: grid; grid-template-columns: 110px 1fr;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 14px; overflow: hidden;
+    transition: border-color 220ms var(--ease-out), transform 220ms var(--ease-out), box-shadow 220ms var(--ease-out);
+  }
+  .mt-layer:hover {
+    border-color: rgba(201,244,20,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 18px 38px -16px rgba(0,0,0,0.6), 0 0 22px rgba(201,244,20,0.08);
+  }
+  .mt-layer .num-rail {
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+    padding: 24px 16px 24px;
+    background: linear-gradient(180deg, rgba(201,244,20,0.06), transparent);
+    border-right: 1px solid var(--border-hairline-strong);
+    position: relative;
+  }
+  .mt-layer .num-rail .n {
+    font: 700 44px/1 var(--font-display); color: var(--brand-lime); letter-spacing: -2px;
+  }
+  .mt-layer .num-rail .l {
+    font: 400 9px/1.4 var(--font-mono); letter-spacing: 1.4px; color: var(--fg-5);
+    text-transform: uppercase; margin-top: 8px; text-align: center;
+  }
+  .mt-layer .num-rail::after {
+    content: ""; position: absolute; left: 50%; bottom: 12px;
+    width: 6px; height: 6px; border-radius: 999px; background: var(--brand-lime);
+    box-shadow: 0 0 8px var(--brand-lime);
+    transform: translateX(-50%);
+  }
+  .mt-layer:nth-child(1) .num-rail::after { opacity: 0.35; box-shadow: none; }
+  .mt-layer:nth-child(2) .num-rail::after { opacity: 0.55; }
+  .mt-layer:nth-child(3) .num-rail::after { opacity: 0.75; }
+  .mt-layer:nth-child(4) .num-rail::after { opacity: 1; }
+
+  .mt-layer .body { padding: 24px 28px 24px; display: flex; flex-direction: column; gap: 12px; }
+  .mt-layer h3 {
+    margin: 0; font: 700 20px/1.3 var(--font-display); letter-spacing: -0.4px; color: #fff;
+  }
+  .mt-layer h3 .sub {
+    display: block; font: 500 13px/1.4 var(--font-mono); letter-spacing: 0.6px;
+    color: var(--brand-lime); margin-top: 4px;
+  }
+  .mt-layer p { margin: 0; font: 400 14.5px/1.7 var(--font-body); color: var(--fg-2); text-wrap: pretty; }
+  .mt-layer .chips {
+    display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px;
+  }
+  .mt-layer .chips span {
+    padding: 4px 10px; border-radius: 999px;
+    background: var(--bg-3);
+    border: 1px solid var(--border-hairline-strong);
+    font: 400 11px/1.4 var(--font-mono); letter-spacing: 0.6px; color: var(--fg-3);
+  }
+
+  /* ---------- FLOW DIAGRAM (Block 4) ---------- */
+  .mt-flow {
+    margin: 32px 0 24px; padding: 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 14px;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    align-items: center; gap: 0;
+    position: relative;
+  }
+  .mt-flow .step {
+    padding: 6px 0;
+    display: flex; flex-direction: column; gap: 6px;
+    position: relative;
+  }
+  .mt-flow .step + .step { padding-left: 28px; }
+  .mt-flow .step + .step::before {
+    content: "›"; position: absolute; left: 6px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--brand-lime); font-size: 22px; line-height: 1;
+  }
+  .mt-flow .step .k {
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px;
+    color: var(--fg-5); text-transform: uppercase;
+  }
+  .mt-flow .step .v {
+    font: 600 15px/1.35 var(--font-display); color: #fff; letter-spacing: -0.2px;
+  }
+  .mt-flow .step:last-child .v {
+    color: var(--brand-lime);
+    font: 700 17px/1.3 var(--font-mono); letter-spacing: -0.3px;
+  }
+
+  /* Calibration panel — two-column */
+  .mt-calib {
+    margin-top: 24px;
+    display: grid; grid-template-columns: 1.05fr 1fr; gap: 20px;
+  }
+  .mt-calib .col {
+    padding: 24px 28px;
+    background: var(--bg-2);
+    border: 1px solid var(--border-hairline-strong);
+    border-radius: 14px;
+  }
+  .mt-calib h3 {
+    margin: 0 0 12px;
+    font: 700 18px/1.3 var(--font-display); letter-spacing: -0.3px; color: #fff;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .mt-calib h3 .pip {
+    display: inline-block; width: 8px; height: 8px; border-radius: 2px;
+    background: var(--brand-lime); box-shadow: 0 0 8px var(--brand-lime);
+  }
+  .mt-calib p {
+    margin: 0; font: 400 14px/1.65 var(--font-body); color: var(--fg-2); text-wrap: pretty;
+  }
+  .mt-calib p + p { margin-top: 10px; }
+  .mt-calib .segments {
+    margin-top: 14px;
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .mt-calib .segments span {
+    padding: 5px 10px; border-radius: 4px;
+    background: rgba(201,244,20,0.06);
+    border: 1px solid rgba(201,244,20,0.30);
+    font: 400 11px/1 var(--font-mono); letter-spacing: 0.6px;
+    color: var(--brand-lime); text-transform: uppercase;
+  }
+
+  /* ---------- WHY IT MATTERS (Block 5) ---------- */
+  .mt-why {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+    margin-top: 28px;
+  }
+  .mt-why .col { padding: 28px; border-radius: 14px; }
+  .mt-why .before {
+    background: var(--bg-1);
+    border: 1px solid var(--border-hairline-strong);
+  }
+  .mt-why .after {
+    background: linear-gradient(180deg, rgba(201,244,20,0.08), rgba(201,244,20,0.02));
+    border: 1px solid rgba(201,244,20,0.35);
+  }
+  .mt-why .col .label {
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px; text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .mt-why .before .label { color: var(--fg-5); }
+  .mt-why .after .label  { color: var(--brand-lime); }
+  .mt-why .col h3 {
+    margin: 0 0 12px; font: 700 19px/1.3 var(--font-display); letter-spacing: -0.3px; color: #fff;
+  }
+  .mt-why .col p {
+    margin: 0; font: 400 14px/1.65 var(--font-body); color: var(--fg-2); text-wrap: pretty;
+  }
+  .mt-why .col ul {
+    margin: 12px 0 0; padding: 0; list-style: none;
+    display: grid; gap: 8px;
+  }
+  .mt-why .col ul li {
+    font: 400 13px/1.5 var(--font-mono); color: var(--fg-3);
+    display: flex; align-items: baseline; gap: 10px;
+  }
+  .mt-why .before ul li::before {
+    content: "—"; color: var(--fg-5); flex: 0 0 14px;
+  }
+  .mt-why .after ul li::before {
+    content: "+"; color: var(--brand-lime); flex: 0 0 14px; font-weight: 700;
+  }
+
+  .mt-disclosure {
+    margin-top: 24px; padding: 18px 22px;
+    border-left: 2px solid var(--fg-5);
+    background: var(--bg-1);
+    border-radius: 0 4px 4px 0;
+  }
+  .mt-disclosure .l {
+    font: 400 10px/1 var(--font-mono); letter-spacing: 1.4px; color: var(--fg-5);
+    text-transform: uppercase; margin-bottom: 8px; display: block;
+  }
+  .mt-disclosure p {
+    margin: 0; font: 400 14px/1.6 var(--font-body); color: var(--fg-2);
+  }
+
+  /* ---------- CTA ---------- */
+  .mt-cta {
+    margin-top: 80px; padding: 40px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(201,244,20,0.06), transparent 80%), var(--bg-2);
+    border: 1px solid rgba(201,244,20,0.25);
+    display: grid; grid-template-columns: 1fr auto auto; gap: 18px; align-items: center;
+  }
+  .mt-cta h3 {
+    margin: 0 0 8px;
+    font: 700 26px/1.2 var(--font-display); letter-spacing: -0.5px; color: #fff;
+  }
+  .mt-cta p { margin: 0; font: 400 14px/1.55 var(--font-body); color: var(--fg-3); max-width: 520px; }
+  .mt-cta a.btn-primary,
+  .mt-cta a.btn-secondary {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 22px; border-radius: 12px;
+    font: 700 14px/1 var(--font-body);
+    text-decoration: none;
+    transition: transform 160ms var(--ease-out), filter 160ms var(--ease-out), border-color 160ms var(--ease-out), color 160ms var(--ease-out);
+  }
+  .mt-cta a.btn-primary { background: var(--brand-lime); color: #000; }
+  .mt-cta a.btn-primary:hover { filter: brightness(1.1); }
+  .mt-cta a.btn-primary:active { transform: scale(0.97); }
+  .mt-cta a.btn-secondary {
+    background: transparent; color: #fff;
+    border: 1px solid var(--border-hairline-strong);
+  }
+  .mt-cta a.btn-secondary:hover { border-color: var(--brand-lime); color: var(--brand-lime); }
+
+  /* Reveal-on-scroll */
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px) {
+    .mt-hero { grid-template-columns: 1fr; gap: 32px; }
+    .mt-hero-art { aspect-ratio: 16/10; }
+    .mt-hero-art .layers { padding: 36px 28px; }
+    .mt-hero-art .layer:nth-child(1) { margin-left: 0; width: 96%; }
+    .mt-hero-art .layer:nth-child(2) { margin-left: 12px; width: 86%; }
+    .mt-hero-art .layer:nth-child(3) { margin-left: 24px; width: 76%; }
+    .mt-hero-art .layer:nth-child(4) { margin-left: 36px; width: 66%; }
+    .mt-sources { grid-template-columns: 1fr; }
+    .mt-noaccess { grid-template-columns: 1fr; }
+    .mt-noaccess .item { border-right: 0; border-bottom: 1px solid var(--border-hairline); padding: 10px 0; }
+    .mt-noaccess .item:last-child { border-bottom: 0; }
+    .mt-layer { grid-template-columns: 1fr; }
+    .mt-layer .num-rail { flex-direction: row; gap: 14px; justify-content: flex-start; padding: 16px 24px; border-right: 0; border-bottom: 1px solid var(--border-hairline-strong); }
+    .mt-layer .num-rail .n { font-size: 32px; }
+    .mt-layer .num-rail .l { margin-top: 0; text-align: left; }
+    .mt-layer .num-rail::after { left: auto; right: 16px; bottom: 50%; transform: translateY(50%); }
+    .mt-flow { grid-template-columns: 1fr; gap: 14px; }
+    .mt-flow .step + .step { padding-left: 0; padding-top: 14px; border-top: 1px solid var(--border-hairline); }
+    .mt-flow .step + .step::before { content: "↓"; top: 6px; left: 0; transform: none; font-size: 18px; }
+    .mt-calib { grid-template-columns: 1fr; }
+    .mt-why { grid-template-columns: 1fr; }
+    .mt-cta { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .mt-shell { padding: 40px 22px 72px; }
+    .mt-hero { padding: 8px 0 40px; }
+    .mt-hero-meta { gap: 22px; }
+    .mt-cta { padding: 28px; }
+  }
+</style>
+</head>
+<body>
+
+<nav class="legal-nav">
+  <a class="brand" href="index.html"><span class="dot"></span>AdScout</a>
+  <div class="right">
+    <a href="index.html#dashboard" data-langlink>Dashboard</a>
+    <a href="index.html#how" data-langlink>How it works</a>
+    <a href="case-studies.html" data-langlink>Case studies</a>
+    <a href="methodology.html" data-page="methodology" class="active" data-langlink>Methodology</a>
+    <a href="index.html#pricing" data-langlink>Pricing</a>
+  </div>
+</nav>
+
+<main class="mt-shell">
+
+  <!-- ============================================================
+       BLOCK 1 — HERO
+       ============================================================ -->
+  <section class="mt-hero">
+    <div class="reveal">
+      <div class="legal-eyebrow"><span class="pulse"></span>METHODOLOGY // HOW ADSCOUT WORKS</div>
+      <h1>The market has always lacked a reliable answer to one question: <em>how much is my competitor actually spending?</em></h1>
+      <p class="lede">AdScout answers it — not by guessing, not by scraping dark data, but through a structured, multi-signal methodology built on publicly mandated transparency data and calibrated against real campaign benchmarks across 20+ industry segments.</p>
+      <div class="mt-hero-meta">
+        <div class="stat"><span class="v">2</span><span class="k">Public transparency sources</span></div>
+        <div class="stat"><span class="v">4</span><span class="k">Signal layers per ad</span></div>
+        <div class="stat"><span class="v">20+</span><span class="k">Industry segments calibrated</span></div>
+      </div>
+    </div>
+    <div class="mt-hero-art reveal">
+      <div class="halo"></div>
+      <div class="grid-bg"></div>
+      <div class="stamp"><span class="pulse"></span>SIGNAL STACK · LIVE</div>
+      <div class="layers" aria-hidden="true">
+        <div class="layer"><span>L1 · Technical</span><span class="v">FORMAT · GEO · RUNTIME</span></div>
+        <div class="layer"><span>L2 · Creative</span><span class="v">PRODUCTION · UGC/HERO</span></div>
+        <div class="layer"><span>L3 · Messaging</span><span class="v">CTA · OFFER · TONE</span></div>
+        <div class="layer"><span>L4 · Intent</span><span class="v">SPEND_EST.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BLOCK 2 — DATA SOURCES
+       ============================================================ -->
+  <section class="mt-section reveal">
+    <div class="sec-label"><span class="bar"></span>01 / DATA SOURCES</div>
+    <h2>Where the data comes from</h2>
+    <p class="body muted">AdScout works exclusively with two public, legally mandated transparency databases. Both are operated by the platforms themselves and accessible without credentials, payment, or special status.</p>
+
+    <div class="mt-sources">
+      <div class="mt-source">
+        <div class="tag">SOURCE_01 · OPEN</div>
+        <h3><span class="swatch meta">M</span>Meta Ad Library</h3>
+        <p>Required by Meta for all active ads across Facebook, Instagram, and Audience Network. Every active ad, geo, format, and estimated reach is publicly visible.</p>
+        <ul>
+          <li>Active creatives, per advertiser</li>
+          <li>Format, placement, geo</li>
+          <li>Campaign runtime &amp; iteration history</li>
+          <li>Estimated reach (where disclosed)</li>
+        </ul>
+        <div class="req">Required disclosure · operated by Meta</div>
+      </div>
+
+      <div class="mt-source">
+        <div class="tag">SOURCE_02 · OPEN</div>
+        <h3><span class="swatch google">G</span>Google Ads Transparency Center</h3>
+        <p>Required by Google under EU Digital Services Act provisions. Covers Search, YouTube, Display, and Discover placements.</p>
+        <ul>
+          <li>Search, YouTube, Display, Discover</li>
+          <li>Verified advertiser identity</li>
+          <li>Creative variants &amp; first-seen dates</li>
+          <li>Geographic targeting</li>
+        </ul>
+        <div class="req">Required disclosure · operated by Google</div>
+      </div>
+    </div>
+
+    <div class="mt-noaccess">
+      <div class="item"><span class="x">✗</span><span class="k">No competitor Ads Manager credentials</span></div>
+      <div class="item"><span class="x">✗</span><span class="k">No third-party data brokers</span></div>
+      <div class="item"><span class="x">✗</span><span class="k">No grey-zone scraping</span></div>
+    </div>
+
+    <div class="mt-quote">
+      <p>We work exclusively with what Meta and Google are legally required to publish. That&#39;s the foundation. What we do with it — that&#39;s the methodology.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BLOCK 3 — SIGNAL READING (4-LAYER MODEL)
+       ============================================================ -->
+  <section class="mt-section reveal">
+    <div class="sec-label"><span class="bar"></span>02 / SIGNAL READING</div>
+    <h2>Reading an ad is not the same as counting an ad</h2>
+    <p class="body">Most tools stop at <strong>"how many ads is this brand running."</strong> AdScout reads what those ads <em>mean</em> — across four layers of signal.</p>
+
+    <div class="mt-layers">
+
+      <article class="mt-layer">
+        <div class="num-rail">
+          <div class="n">01</div>
+          <div class="l">Technical</div>
+        </div>
+        <div class="body">
+          <h3>Technical signals<span class="sub">What the platform tells us about delivery</span></h3>
+          <p>Format (Reels, Story, Feed video, Carousel, Static, YouTube TrueView, Display), creative duration, geographic targeting, language, campaign runtime, frequency signals, and placement-level audience indicators.</p>
+          <p>These are the <strong>structural parameters of a campaign</strong> — they tell us how the brand is buying media, before we even look at the creative itself.</p>
+          <div class="chips">
+            <span>FORMAT</span><span>PLACEMENT</span><span>GEO</span><span>RUNTIME</span><span>LANGUAGE</span><span>FREQUENCY</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="mt-layer">
+        <div class="num-rail">
+          <div class="n">02</div>
+          <div class="l">Creative</div>
+        </div>
+        <div class="body">
+          <h3>Creative signals<span class="sub">What the creative tells us about production intent</span></h3>
+          <p>Creative type (UGC vs. hero production, polished vs. lo-fi, static vs. video), production value, presence of a spokesperson or influencer, voice-over structure vs. dialogue, and visual treatment.</p>
+          <p>A brand running high-production hero films behaves differently than a brand flooding the feed with lo-fi UGC. These signals tell us about <strong>budget philosophy and campaign stage</strong>.</p>
+          <div class="chips">
+            <span>UGC / HERO</span><span>PRODUCTION VALUE</span><span>SPOKESPERSON</span><span>VO vs. DIALOGUE</span><span>VISUAL TREATMENT</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="mt-layer">
+        <div class="num-rail">
+          <div class="n">03</div>
+          <div class="l">Messaging</div>
+        </div>
+        <div class="body">
+          <h3>Messaging signals<span class="sub">What the ad actually says</span></h3>
+          <p>Product callouts, pricing hooks and promotional structures, USP framing, CTA architecture, and emotional tone (functional, aspirational, urgent, humorous).</p>
+          <p>This layer connects the creative to the brand&#39;s strategic communication — and reveals whether a campaign is <strong>pushing a new product, defending market share, or harvesting demand</strong>.</p>
+          <div class="chips">
+            <span>PRODUCT CALLOUT</span><span>PRICE HOOK</span><span>USP FRAMING</span><span>CTA ARCHITECTURE</span><span>TONE</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="mt-layer">
+        <div class="num-rail">
+          <div class="n">04</div>
+          <div class="l">Intent</div>
+        </div>
+        <div class="body">
+          <h3>Intent signals<span class="sub">Where in the funnel the ad is operating</span></h3>
+          <p>By combining the three layers above, AdScout classifies each ad by funnel stage: <strong>top-of-funnel awareness, mid-funnel consideration, or bottom-of-funnel conversion</strong>.</p>
+          <p>A brand&#39;s funnel distribution — how much they&#39;re investing at each stage — is itself a competitive signal.</p>
+          <div class="chips">
+            <span>TOP · AWARENESS</span><span>MID · CONSIDERATION</span><span>BOTTOM · CONVERSION</span>
+          </div>
+        </div>
+      </article>
+
+    </div>
+
+    <div class="mt-quote">
+      <p>The algorithm doesn&#39;t ask "how many active ads does this brand have." It reads what those ads mean within the brand&#39;s strategy — and classifies accordingly. The richer the signal, the more precise the spend estimate.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BLOCK 4 — SPEND MODELING
+       ============================================================ -->
+  <section class="mt-section reveal">
+    <div class="sec-label"><span class="bar"></span>03 / SPEND MODELING</div>
+    <h2>From signal to number — how estimated spend is calculated</h2>
+    <p class="body muted">Once an ad is classified by objective, format, and funnel stage, AdScout assigns a benchmark CPM and models estimated investment using reach and frequency signals from the platform data.</p>
+
+    <div class="mt-flow">
+      <div class="step"><span class="k">Step 01</span><span class="v">Ad signal</span></div>
+      <div class="step"><span class="k">Step 02</span><span class="v">Objective classification</span></div>
+      <div class="step"><span class="k">Step 03</span><span class="v">CPM calibration</span></div>
+      <div class="step"><span class="k">Step 04</span><span class="v">Spend estimate</span></div>
+    </div>
+
+    <div class="mt-calib">
+      <div class="col">
+        <h3><span class="pip"></span>The classification step</h3>
+        <p>Each ad is mapped to a media objective category — <strong>reach, engagement, traffic, or conversion</strong> — which determines the CPM baseline applied.</p>
+        <p>Format and geo further refine the estimate: a Reels conversion campaign in the DACH market has a materially different CPM profile than a Display awareness campaign in Slovakia.</p>
+        <div class="segments">
+          <span>REACH</span><span>ENGAGEMENT</span><span>TRAFFIC</span><span>CONVERSION</span>
+        </div>
+      </div>
+      <div class="col">
+        <h3><span class="pip"></span>The calibration advantage</h3>
+        <p>This is where AdScout&#39;s background as part of a <strong>media agency group</strong> becomes a structural advantage. Our CPM benchmarks are not sourced from public averages or self-reported industry surveys.</p>
+        <p>They are calibrated against anonymized, aggregated campaign data from <strong>years of real campaign audits</strong> across 20+ industry segments. No individual campaign data is ever identifiable — only category-level CPM medians and distribution curves.</p>
+        <div class="segments">
+          <span>RETAIL</span><span>FMCG</span><span>PHARMA</span><span>FINANCE</span><span>TELCO</span><span>AUTOMOTIVE</span><span>E-COMMERCE</span><span>+13 MORE</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-quote">
+      <p>We are one of the few companies in the market that simultaneously holds (a) access to public transparency data and (b) anonymized benchmarks from 20+ segments built over years of agency-side media auditing. The second part cannot be replicated without a media agency with real history.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       BLOCK 5 — WHY IT MATTERS
+       ============================================================ -->
+  <section class="mt-section reveal">
+    <div class="sec-label"><span class="bar"></span>04 / SO WHAT</div>
+    <h2>Competitive intelligence that didn&#39;t exist before</h2>
+    <p class="body">Before AdScout, competitive media spend data in most markets was either unavailable, anecdotal, or locked behind expensive panel-based research with multi-week lag.</p>
+    <p class="body">AdScout provides directional spend estimates available in <strong>near real-time</strong> — broken down by brand, platform, format, funnel stage, and geography. The methodology is designed for one purpose: giving strategists a consistently reliable view of how the competitive landscape is moving, so decisions can be made on signal rather than assumption.</p>
+
+    <div class="mt-why">
+      <div class="col before">
+        <div class="label">Before · The status quo</div>
+        <h3>What the market settled for</h3>
+        <ul>
+          <li>Unavailable in most categories</li>
+          <li>Anecdotal — what your team heard at a conference</li>
+          <li>Panel research with 4–6 week lag</li>
+          <li>Premium pricing, narrow geo coverage</li>
+        </ul>
+      </div>
+      <div class="col after">
+        <div class="label">With AdScout</div>
+        <h3>What strategists can now see</h3>
+        <ul>
+          <li>Directional estimates · near real-time</li>
+          <li>Broken down by brand, platform, format</li>
+          <li>Funnel-stage distribution per competitor</li>
+          <li>Same lens across every market you operate in</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mt-disclosure">
+      <span class="l">Honest disclosure</span>
+      <p>Estimated media investment figures should be interpreted as <strong>directional estimates designed for competitive comparison</strong> — not as exact media invoices. That distinction matters, and we&#39;re transparent about it.</p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       CLOSING / CTA
+       ============================================================ -->
+  <section class="mt-cta reveal">
+    <div>
+      <h3>See the methodology in action</h3>
+      <p>Request a demo or explore a sample competitive analysis to see how AdScout applies this methodology to your category.</p>
+    </div>
+    <a class="btn-primary" href="#" data-open-contact="demo">Book a demo
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+    </a>
+    <a class="btn-secondary" href="#" data-open-contact="quote">Get a quote</a>
+  </section>
+
+  <div class="legal-footer" style="margin-top:48px;">
+    <span>© 2026 ADSCOUT INTELLIGENCE</span>
+    <span>
+      <a href="legal/terms.html?lang=EN" data-langlink>Terms</a> &nbsp;·&nbsp;
+      <a href="legal/privacy.html?lang=EN" data-langlink>Privacy</a> &nbsp;·&nbsp;
+      <a href="legal/imprint.html?lang=EN" data-langlink>Imprint</a>
+    </span>
+  </div>
+</main>
+
+<script>
+(function () {
+  // Lang switching — methodology is EN-only for now; SK falls back gracefully.
+  // We still propagate ?lang on outbound links so users return to their language.
+  function paramLang() {
+    var m = location.search.match(/[?&]lang=([A-Za-z]{2})/);
+    return m ? m[1].toUpperCase() : null;
+  }
+  function setLang(lang) {
+    document.querySelectorAll('a[data-langlink]').forEach(function (a) {
+      var href = a.getAttribute('href') || '';
+      var clean = href.replace(/[?&]lang=[A-Za-z]{2}/, '');
+      if (clean.indexOf('#') === 0) return;
+      var sep = clean.indexOf('?') >= 0 ? '&' : '?';
+      a.setAttribute('href', clean + sep + 'lang=' + lang);
+    });
+    try { localStorage.setItem('adscout.lang', lang); } catch (e) {}
+  }
+  var initial = paramLang() || (function () { try { return localStorage.getItem('adscout.lang'); } catch (e) { return null; } })() || 'EN';
+  setLang(initial);
+
+  // Scroll-reveal
+  var io = ('IntersectionObserver' in window) ? new IntersectionObserver(function (entries) {
+    entries.forEach(function (e) {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }) : null;
+  document.querySelectorAll('.reveal').forEach(function (el) {
+    if (io) io.observe(el); else el.classList.add('in');
+  });
+})();
+</script>
+<!-- Mount point for the React ContactModal (reuses src/ContactModal.jsx) -->
+<div id="contact-root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="src/constants.jsx"></script>
+<script type="text/babel" src="src/ContactModal.jsx"></script>
+<script type="text/babel">
+  /* Bootstrap the ContactModal on this page only. Buttons with
+     [data-open-contact="demo|quote|contact"] open the matching form. */
+  function MethodologyContactMount() {
+    const [open, setOpen] = React.useState(false);
+    const [type, setType] = React.useState("demo");
+    const langRef = React.useRef(
+      (function () {
+        try { return localStorage.getItem("adscout.lang") || "EN"; } catch (e) { return "EN"; }
+      })()
+    );
+
+    React.useEffect(() => {
+      const onClick = (e) => {
+        const t = e.target.closest && e.target.closest("[data-open-contact]");
+        if (!t) return;
+        e.preventDefault();
+        const v = (t.getAttribute("data-open-contact") || "demo").toLowerCase();
+        setType(v === "quote" || v === "contact" ? v : "demo");
+        setOpen(true);
+      };
+      document.addEventListener("click", onClick);
+      return () => document.removeEventListener("click", onClick);
+    }, []);
+
+    return (
+      <ContactModal
+        lang={langRef.current}
+        open={open}
+        plan={null}
+        formType={type}
+        onClose={() => setOpen(false)}
+      />
+    );
+  }
+  ReactDOM.createRoot(document.getElementById("contact-root")).render(<MethodologyContactMount />);
+</script>
+
+</body>
+</html>
