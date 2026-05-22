@@ -1,0 +1,376 @@
+/* ============================================================
+   AdScout Design System — Component Layer
+   ============================================================
+   Reusable building blocks. All values reference tokens.css.
+   Include after tokens.css + typography.css.
+
+   Components included:
+     • Button (primary, ghost, dark, icon-arrow)
+     • Input (text, search)
+     • Card (base, inset, hero)
+     • Badge / Pill / Eyebrow
+     • Nav item (top-nav links)
+     • Filter chip
+     • Segmented control / Tab
+     • KPI cell
+     • Terminal CLI bar
+     • Legend dot
+   ============================================================ */
+
+/* ============================================================
+   BUTTONS
+   ============================================================ */
+.ds-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  border-radius: var(--radius-md);
+  border: 0;
+  background: transparent;
+  color: inherit;
+  font: var(--font-weight-bold) 15px/1 var(--font-body);
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background var(--duration-med) var(--ease-out),
+    transform  var(--duration-fast) var(--ease-out),
+    border-color var(--duration-med) var(--ease-out),
+    filter var(--duration-med) var(--ease-out);
+}
+.ds-btn:active { transform: scale(0.97); }
+.ds-btn:focus-visible { outline: 2px solid var(--color-brand-lime); outline-offset: 2px; }
+
+/* Primary — signature lime */
+.ds-btn--primary {
+  background: var(--color-brand-lime);
+  color: #000;
+}
+.ds-btn--primary:hover { background: var(--color-brand-lime-strong); }
+
+/* Ghost — outlined */
+.ds-btn--ghost {
+  background: transparent;
+  color: var(--color-fg-1);
+  border: 1px solid var(--color-border-hairline-strong);
+}
+.ds-btn--ghost:hover {
+  background: var(--color-bg-3);
+  border-color: var(--color-fg-5);
+}
+
+/* Dark — black-on-lime (used on lime banner) */
+.ds-btn--dark {
+  background: #000;
+  color: var(--color-brand-lime);
+  box-shadow: var(--shadow-md);
+}
+.ds-btn--dark:hover { background: var(--color-bg-1); }
+
+/* Compact — for nav */
+.ds-btn--compact {
+  padding: 10px 20px;
+  font-size: var(--font-size-base);
+  border-radius: var(--radius-md);
+}
+
+/* Block — full-width (pricing) */
+.ds-btn--block { width: 100%; justify-content: center; }
+
+/* Built-in trailing arrow icon */
+.ds-btn .ds-btn__arrow {
+  width: 14px; height: 14px;
+  stroke: currentColor; stroke-width: 2.5;
+  stroke-linecap: round;
+  fill: none;
+}
+
+/* ============================================================
+   INPUTS
+   ============================================================ */
+.ds-input {
+  width: 100%;
+  background: var(--color-bg-5);
+  border: 1px solid var(--color-border-hairline-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font: var(--font-weight-regular) var(--font-size-md)/1.2 var(--font-body);
+  color: var(--color-fg-1);
+  transition: border-color var(--duration-med) var(--ease-out),
+              background var(--duration-med) var(--ease-out);
+}
+.ds-input::placeholder { color: var(--color-fg-5); }
+.ds-input:hover  { border-color: var(--color-fg-5); }
+.ds-input:focus  {
+  outline: none;
+  border-color: var(--color-brand-lime);
+  background: var(--color-bg-3);
+  box-shadow: 0 0 0 3px var(--color-brand-lime-20);
+}
+.ds-input:disabled {
+  color: var(--color-fg-disabled);
+  background: var(--color-bg-3);
+  cursor: not-allowed;
+}
+
+.ds-input--mono {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================================
+   CARDS
+   ============================================================ */
+.ds-card {
+  background: var(--color-bg-3);
+  border: 1px solid var(--color-border-hairline-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: transform var(--duration-med) var(--ease-out),
+              border-color var(--duration-med) var(--ease-out);
+}
+
+.ds-card--inset {
+  background: var(--color-bg-2);
+}
+
+.ds-card--hero {
+  background: var(--color-bg-2);
+  box-shadow: var(--shadow-card-hero);
+}
+
+.ds-card--hoverlift:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-fg-5);
+}
+
+.ds-card--lime {
+  background:
+    linear-gradient(180deg, var(--color-brand-lime-10), transparent 80%),
+    var(--color-bg-3);
+  border-color: var(--color-border-lime);
+}
+
+/* ============================================================
+   BADGES, PILLS, EYEBROWS
+   ============================================================ */
+.ds-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 3px 8px;
+  border-radius: var(--radius-xs);
+  font: var(--font-weight-bold) var(--font-size-2xs)/1 var(--font-mono);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+.ds-badge--lime   { background: var(--color-brand-lime); color: #000; }
+.ds-badge--info   { background: var(--color-data-blue-20); color: var(--color-data-blue-soft); }
+.ds-badge--neutral{ background: var(--color-bg-5); color: var(--color-fg-3); }
+.ds-badge--success{ background: var(--color-brand-lime-10); color: var(--color-brand-lime); }
+.ds-badge--danger { background: rgba(239,68,68,0.15); color: var(--color-data-red); }
+
+/* Pill — larger, eyebrow-style */
+.ds-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-pill);
+  background: rgba(18, 18, 26, 0.6);
+  border: 1px solid var(--color-border-hairline-strong);
+  font: var(--font-weight-regular) var(--font-size-2xs)/1.5 var(--font-mono);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--color-fg-3);
+  text-transform: uppercase;
+}
+
+/* Live dot (use inside .ds-pill or anywhere) */
+.ds-dot-live {
+  width: 7px; height: 7px;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-lime);
+  box-shadow: var(--shadow-glow-lime-soft);
+  animation: ds-pulse 1.4s var(--ease-in-out) infinite;
+}
+
+@keyframes ds-pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.35; } }
+@keyframes ds-blink { 50% { opacity: 0; } }
+
+/* ============================================================
+   NAV ITEMS
+   ============================================================ */
+.ds-nav {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--container-pad);
+  background: var(--color-surface-glass-soft);
+  backdrop-filter: blur(var(--surface-nav-blur));
+  -webkit-backdrop-filter: blur(var(--surface-nav-blur));
+  border-bottom: 1px solid var(--color-border-hairline);
+}
+
+.ds-nav-link {
+  font: var(--font-weight-medium) var(--font-size-base)/1 var(--font-body);
+  color: var(--color-fg-4);
+  padding: var(--space-1) 0;
+  cursor: pointer;
+  transition: color var(--duration-med) var(--ease-out);
+}
+.ds-nav-link:hover,
+.ds-nav-link--active { color: var(--color-fg-1); }
+
+/* ============================================================
+   FILTER CHIP
+   ============================================================ */
+.ds-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 6px var(--space-3);
+  border-radius: var(--radius-pill);
+  background: var(--color-bg-3);
+  border: 1px solid var(--color-border-hairline);
+  font: var(--font-weight-medium) var(--font-size-xs)/1 var(--font-mono);
+  letter-spacing: 0.8px;
+  color: var(--color-fg-3);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+.ds-chip:hover { color: var(--color-fg-1); }
+.ds-chip--active {
+  background: var(--color-brand-lime-20);
+  color: var(--color-brand-lime);
+  border-color: var(--color-border-lime);
+}
+
+/* ============================================================
+   SEGMENTED / TAB
+   ============================================================ */
+.ds-tab {
+  padding: var(--space-2) var(--space-4);
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-5);
+  color: var(--color-fg-3);
+  border: 1px solid var(--color-border-hairline-strong);
+  font: var(--font-weight-medium) var(--font-size-xs)/1 var(--font-mono);
+  letter-spacing: var(--letter-spacing-wider);
+  text-transform: uppercase;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  transition: all var(--duration-med) var(--ease-out);
+}
+.ds-tab:hover { color: var(--color-fg-1); }
+.ds-tab--active {
+  background: var(--color-brand-lime);
+  color: #000;
+  border-color: var(--color-brand-lime);
+  font-weight: var(--font-weight-bold);
+}
+
+.ds-tab__count {
+  padding: 2px 6px;
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-3);
+  font-size: 9px;
+  letter-spacing: 0.6px;
+  font-weight: var(--font-weight-bold);
+}
+.ds-tab--active .ds-tab__count {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================
+   KPI CELL — used in dashboard stat strip
+   ============================================================ */
+.ds-kpi {
+  flex: 1;
+  min-width: 170px;
+  padding: 18px var(--space-5);
+  background: var(--color-bg-3);
+  border-right: 1px solid var(--color-border-hairline);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+.ds-kpi__label {
+  font: var(--font-weight-regular) var(--font-size-2xs)/1.4 var(--font-mono);
+  letter-spacing: var(--letter-spacing-wider);
+  color: var(--color-fg-5);
+  text-transform: uppercase;
+}
+.ds-kpi__value {
+  font: var(--font-weight-bold) 26px/1 var(--font-mono);
+  letter-spacing: -0.5px;
+  color: var(--color-fg-1);
+}
+.ds-kpi__value--accent { color: var(--color-brand-lime); }
+.ds-kpi__sub {
+  font: var(--font-weight-regular) var(--font-size-2xs)/1.4 var(--font-mono);
+  color: var(--color-fg-5);
+}
+
+/* ============================================================
+   TERMINAL CLI BAR
+   ============================================================ */
+.ds-terminal {
+  background: var(--color-bg-1);
+  border: 1px solid var(--color-border-hairline);
+  border-radius: var(--radius-sm);
+  padding: 10px var(--space-3);
+  font: var(--font-weight-regular) var(--font-size-xs)/var(--line-height-body) var(--font-mono);
+  color: var(--color-fg-3);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+.ds-terminal__prompt { color: var(--color-brand-lime); }
+.ds-terminal__cursor { color: var(--color-fg-1); animation: ds-blink 1s step-end infinite; }
+.ds-terminal__meta {
+  margin-left: auto;
+  color: var(--color-fg-5);
+  font-size: var(--font-size-2xs);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+}
+
+/* ============================================================
+   LEGEND DOT
+   ============================================================ */
+.ds-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+.ds-legend__swatch {
+  width: 10px; height: 10px;
+  border-radius: var(--radius-pill);
+}
+.ds-legend__label {
+  font: var(--font-weight-regular) var(--font-size-xs)/1 var(--font-mono);
+  color: var(--color-fg-3);
+}
+
+/* ============================================================
+   LAYOUT HELPERS
+   ============================================================ */
+.ds-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-pad);
+}
+
+.ds-section { padding: var(--space-10) var(--container-pad); background: var(--color-bg-0); }
+.ds-section--bordered { border-top: 1px solid var(--color-border-hairline); }
+
+.ds-dot-grid {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px);
+  background-size: 24px 24px;
+}

@@ -1,0 +1,292 @@
+/* ============================================================
+   AdScout Design System — Design Tokens
+   ============================================================
+   Single source of truth. Every color, type, spacing, radius,
+   shadow, motion, and breakpoint used across the AdScout product
+   and marketing site is defined here as a CSS custom property.
+
+   Change a value here and it cascades everywhere.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap');
+
+:root {
+  /* ============================================================
+     1. COLORS
+     ============================================================ */
+
+  /* --- Brand --- */
+  --color-brand-lime:           rgb(201, 244, 20);      /* #C9F414 — signature accent */
+  --color-brand-lime-strong:    rgb(229, 255, 0);       /* hover / max-energy */
+  --color-brand-lime-10:        rgba(201, 244, 20, 0.10);
+  --color-brand-lime-20:        rgba(201, 244, 20, 0.20);
+  --color-brand-lime-30:        rgba(201, 244, 20, 0.30);
+  --color-brand-lime-40:        rgba(201, 244, 20, 0.40);
+  --color-brand-lime-60:        rgba(201, 244, 20, 0.60);
+
+  /* --- Surfaces (dark stack — lower = deeper) --- */
+  --color-bg-0:                 rgb(10, 10, 15);        /* Page bg — near-black */
+  --color-bg-1:                 rgb(14, 14, 19);        /* Terminal row / chrome */
+  --color-bg-2:                 rgb(18, 18, 26);        /* Inset panel */
+  --color-bg-3:                 rgb(27, 27, 32);        /* Card */
+  --color-bg-4:                 rgb(31, 31, 37);        /* Nested card / hover */
+  --color-bg-5:                 rgb(42, 41, 47);        /* Elevated control / input */
+  --color-bg-6:                 rgb(53, 52, 58);        /* Segmented inactive */
+  --color-surface-glass:        rgba(10, 10, 15, 0.80); /* Sticky nav glass */
+  --color-surface-glass-soft:   rgba(10, 10, 15, 0.72);
+
+  /* --- Foreground (text) --- */
+  --color-fg-1:                 rgb(255, 255, 255);     /* Display / primary */
+  --color-fg-2:                 rgb(228, 225, 233);     /* Secondary body */
+  --color-fg-3:                 rgb(196, 201, 172);     /* Tertiary olive-cream — terminal meta */
+  --color-fg-4:                 rgb(148, 163, 184);     /* Muted UI */
+  --color-fg-5:                 rgb(100, 116, 139);     /* Footer / labels */
+  --color-fg-disabled:          rgba(196, 201, 172, 0.40);
+
+  /* --- Borders & hairlines --- */
+  --color-border-hairline:        rgba(68, 73, 51, 0.15); /* Signature olive hairline */
+  --color-border-hairline-strong: rgba(68, 73, 51, 0.30);
+  --color-border-slate:           rgba(30, 41, 59, 0.50);
+  --color-border-lime:            rgba(201, 244, 20, 0.30);
+  --color-border-lime-soft:       rgba(201, 244, 20, 0.15);
+
+  /* --- Semantic / data --- */
+  --color-data-blue:            rgb(59, 130, 246);
+  --color-data-blue-soft:       rgb(96, 165, 250);
+  --color-data-blue-20:         rgba(59, 130, 246, 0.20);
+  --color-data-green:           rgb(34, 197, 94);
+  --color-data-yellow:          rgb(250, 204, 21);
+  --color-data-red:             rgb(239, 68, 68);
+  --color-data-orange:          rgb(249, 115, 22);
+  --color-data-purple:          rgb(168, 85, 247);
+  --color-data-pink:            rgb(236, 72, 153);
+  --color-data-cyan:            rgb(6, 182, 212);
+  --color-data-violet:          rgb(139, 92, 246);
+
+  /* --- Categorical chart palette (ordered for dark-bg readability) --- */
+  --color-chart-1:              var(--color-brand-lime);
+  --color-chart-2:              var(--color-data-green);
+  --color-chart-3:              var(--color-data-orange);
+  --color-chart-4:              var(--color-data-purple);
+  --color-chart-5:              var(--color-data-pink);
+  --color-chart-6:              var(--color-data-blue);
+  --color-chart-7:              var(--color-data-cyan);
+  --color-chart-8:              var(--color-data-yellow);
+  --color-chart-9:              var(--color-data-red);
+  --color-chart-10:             var(--color-data-violet);
+
+  /* --- Semantic roles --- */
+  --color-success:              var(--color-brand-lime);
+  --color-info:                 var(--color-data-blue-soft);
+  --color-warning:              var(--color-data-yellow);
+  --color-danger:               var(--color-data-red);
+
+  /* ============================================================
+     2. TYPOGRAPHY
+     ============================================================ */
+
+  /* --- Families --- */
+  --font-display:               "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-body:                  "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono:                  "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* --- Sizes (8-step scale) --- */
+  --font-size-2xs:              10px;   /* mono caps, eyebrow */
+  --font-size-xs:               11px;   /* mono small */
+  --font-size-sm:               12px;   /* mono data */
+  --font-size-base:             14px;   /* body small / label */
+  --font-size-md:               16px;   /* body */
+  --font-size-lg:               18px;   /* lead */
+  --font-size-xl:               20px;   /* body large / h4 */
+  --font-size-2xl:              24px;   /* h3 */
+  --font-size-3xl:              36px;   /* mono large display */
+  --font-size-4xl:              48px;   /* h2 / section title */
+  --font-size-5xl:              60px;   /* h1 / final CTA */
+  --font-size-6xl:              72px;   /* hero display */
+  --font-size-7xl:              96px;   /* display xl */
+
+  /* --- Weights --- */
+  --font-weight-regular:        400;
+  --font-weight-medium:         500;
+  --font-weight-semibold:       600;
+  --font-weight-bold:           700;
+  --font-weight-extrabold:      800;
+
+  /* --- Line heights --- */
+  --line-height-tight:          1.0;    /* display */
+  --line-height-snug:           1.05;   /* h1 */
+  --line-height-headline:       1.2;    /* card title */
+  --line-height-heading:        1.33;   /* h3 */
+  --line-height-body:           1.5;    /* body */
+  --line-height-relaxed:        1.625;  /* body large */
+
+  /* --- Letter spacing --- */
+  --letter-spacing-tighter:     -4.8px; /* display-xl */
+  --letter-spacing-tight:       -3.6px; /* display */
+  --letter-spacing-h1:          -3px;
+  --letter-spacing-h2:          -2.4px;
+  --letter-spacing-h3:          -1px;
+  --letter-spacing-normal:      0;
+  --letter-spacing-wide:        1px;    /* mono caps */
+  --letter-spacing-wider:       1.2px;  /* eyebrow */
+  --letter-spacing-widest:      1.4px;  /* section label */
+
+  /* ============================================================
+     3. SPACING (4px grid)
+     ============================================================ */
+  --space-0:                    0;
+  --space-1:                    4px;
+  --space-2:                    8px;
+  --space-3:                    12px;
+  --space-4:                    16px;
+  --space-5:                    24px;
+  --space-6:                    32px;
+  --space-7:                    48px;
+  --space-8:                    64px;
+  --space-9:                    96px;
+  --space-10:                   128px;
+
+  /* ============================================================
+     4. RADII
+     ============================================================ */
+  --radius-xs:                  4px;    /* mono chip / segmented */
+  --radius-sm:                  8px;    /* small card / input */
+  --radius-md:                  12px;   /* button / card-inner */
+  --radius-lg:                  16px;   /* card / panel */
+  --radius-xl:                  24px;   /* hero card / CTA banner */
+  --radius-pill:                9999px; /* eyebrow / chip */
+
+  /* ============================================================
+     5. SHADOWS
+     ============================================================ */
+  --shadow-sm:                  0 1px 2px rgba(0, 0, 0, 0.25);
+  --shadow-md:                  0 8px 10px -6px rgba(0, 0, 0, 0.10),
+                                0 20px 25px -5px rgba(0, 0, 0, 0.10);
+  --shadow-lg:                  0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --shadow-xl:                  0 25px 50px -12px rgba(0, 0, 0, 0.45);
+  --shadow-nav:                 0 20px 40px 0 rgba(0, 0, 0, 0.40);
+
+  /* Glow shadows — brand lime aura */
+  --shadow-glow-lime-soft:      0 0 14px rgba(201, 244, 20, 0.50);
+  --shadow-glow-lime:           0 0 20px rgba(201, 244, 20, 0.10);
+  --shadow-glow-lime-strong:    0 0 30px rgba(201, 244, 20, 0.08);
+
+  /* Composite shadows */
+  --shadow-card:                var(--shadow-lg), var(--shadow-glow-lime);
+  --shadow-card-hero:           var(--shadow-xl), var(--shadow-glow-lime-strong);
+
+  /* ============================================================
+     6. MOTION
+     ============================================================ */
+  --ease-out:                   cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out:                cubic-bezier(0.65, 0, 0.35, 1);
+  --duration-fast:              120ms;
+  --duration-med:               200ms;
+  --duration-slow:              320ms;
+
+  /* ============================================================
+     7. Z-INDEX SCALE
+     ============================================================ */
+  --z-base:                     0;
+  --z-raised:                   1;
+  --z-dropdown:                 10;
+  --z-sticky:                   50;   /* TopNav */
+  --z-overlay:                  100;
+  --z-modal:                    150;
+  --z-toast:                    180;
+  --z-tweak-panel:              200;  /* highest UI */
+
+  /* ============================================================
+     8. BREAKPOINTS (also exposed as media-query helpers)
+     ============================================================ */
+  --breakpoint-sm:              640px;
+  --breakpoint-md:              768px;
+  --breakpoint-lg:              1024px;
+  --breakpoint-xl:              1280px;
+  --breakpoint-2xl:             1536px;
+
+  /* ============================================================
+     9. LAYOUT
+     ============================================================ */
+  --container-max:              1216px;
+  --container-pad:               32px;
+  --nav-height:                  72px;
+  --surface-nav-blur:            24px;
+
+  /* ============================================================
+     10. LEGACY ALIASES — keep old token names working
+     ============================================================
+     Older code uses --brand-lime, --bg-0, --fg-1 etc. Aliasing here
+     keeps backward compatibility without forking the codebase.
+     ============================================================ */
+
+  --brand-lime:                 var(--color-brand-lime);
+  --brand-lime-strong:          var(--color-brand-lime-strong);
+  --brand-lime-10:              var(--color-brand-lime-10);
+  --brand-lime-20:              var(--color-brand-lime-20);
+  --brand-lime-30:              var(--color-brand-lime-30);
+  --brand-lime-40:              var(--color-brand-lime-40);
+  --brand-lime-shadow:          var(--shadow-glow-lime);
+
+  --bg-0: var(--color-bg-0);   --bg-1: var(--color-bg-1);
+  --bg-2: var(--color-bg-2);   --bg-3: var(--color-bg-3);
+  --bg-4: var(--color-bg-4);   --bg-5: var(--color-bg-5);
+  --bg-6: var(--color-bg-6);
+  --surface-glass:              var(--color-surface-glass);
+
+  --fg-1: var(--color-fg-1);   --fg-2: var(--color-fg-2);
+  --fg-3: var(--color-fg-3);   --fg-4: var(--color-fg-4);
+  --fg-5: var(--color-fg-5);
+  --fg-disabled:                var(--color-fg-disabled);
+
+  --border-hairline:            var(--color-border-hairline);
+  --border-hairline-strong:     var(--color-border-hairline-strong);
+  --border-slate:               var(--color-border-slate);
+
+  --data-blue:                  var(--color-data-blue);
+  --data-blue-soft:             var(--color-data-blue-soft);
+  --data-blue-20:               var(--color-data-blue-20);
+  --data-green:                 var(--color-data-green);
+  --data-yellow:                var(--color-data-yellow);
+  --data-red:                   var(--color-data-red);
+  --data-orange:                var(--color-data-orange);
+  --data-purple:                var(--color-data-purple);
+  --data-pink:                  var(--color-data-pink);
+  --data-cyan:                  var(--color-data-cyan);
+  --data-violet:                var(--color-data-violet);
+
+  --chart-1: var(--color-chart-1);  --chart-2: var(--color-chart-2);
+  --chart-3: var(--color-chart-3);  --chart-4: var(--color-chart-4);
+  --chart-5: var(--color-chart-5);  --chart-6: var(--color-chart-6);
+  --chart-7: var(--color-chart-7);  --chart-8: var(--color-chart-8);
+  --chart-9: var(--color-chart-9);  --chart-10: var(--color-chart-10);
+
+  --success: var(--color-success); --info: var(--color-info);
+  --warning: var(--color-warning); --danger: var(--color-danger);
+
+  --shadow-glow-lime:           var(--shadow-glow-lime);
+  --dur-fast: var(--duration-fast);
+  --dur-med:  var(--duration-med);
+  --dur-slow: var(--duration-slow);
+}
+
+/* ============================================================
+   Base reset — every page that loads tokens.css starts here
+   ============================================================ */
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-bg-0);
+  color: var(--color-fg-2);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--color-brand-lime);
+  color: #000;
+}

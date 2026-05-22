@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AdScout Design System — Live Preview</title>
+  <link rel="stylesheet" href="tokens.css" />
+  <link rel="stylesheet" href="typography.css" />
+  <link rel="stylesheet" href="components.css" />
+  <style>
+    .swatch {
+      display: flex; flex-direction: column; gap: 8px;
+      padding: var(--space-3);
+      background: var(--color-bg-3);
+      border: 1px solid var(--color-border-hairline);
+      border-radius: var(--radius-sm);
+    }
+    .swatch__chip { height: 56px; border-radius: var(--radius-xs); border: 1px solid var(--color-border-hairline); }
+    .swatch__name { font: 700 11px/1 var(--font-mono); color: var(--color-fg-2); letter-spacing: 0.8px; }
+    .swatch__val  { font: 400 10px/1.2 var(--font-mono); color: var(--color-fg-5); }
+
+    .grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+    .block { margin-bottom: var(--space-10); }
+    .row { display: flex; gap: var(--space-3); flex-wrap: wrap; align-items: center; }
+
+    .type-row {
+      display: grid; grid-template-columns: 120px 1fr;
+      gap: var(--space-5); padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--color-border-hairline);
+      align-items: baseline;
+    }
+    .type-row__meta {
+      font: 400 10px/1.4 var(--font-mono); letter-spacing: 1.2px;
+      color: var(--color-fg-5); text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <header class="ds-nav">
+    <div style="display: flex; align-items: center; gap: 10px;">
+      <span style="width: 11px; height: 11px; border-radius: 3px; background: var(--color-brand-lime); box-shadow: var(--shadow-glow-lime-soft);"></span>
+      <span style="font: 800 20px/1 var(--font-display); letter-spacing: -1px; color: var(--color-fg-1);">AdScout · Design System</span>
+    </div>
+    <div class="row">
+      <a class="ds-nav-link ds-nav-link--active">Tokens</a>
+      <a class="ds-nav-link">Type</a>
+      <a class="ds-nav-link">Components</a>
+    </div>
+    <div class="row">
+      <span class="ds-pill"><span class="ds-dot-live"></span>v1.0.0</span>
+    </div>
+  </header>
+
+  <main class="ds-container" style="padding-top: var(--space-9); padding-bottom: var(--space-10);">
+
+    <!-- Hero summary -->
+    <section class="block">
+      <div class="ds-section-label" style="margin-bottom: var(--space-4);">
+        <span style="color: var(--color-brand-lime);">[00]</span>
+        <span style="margin-left: var(--space-3);">OVERVIEW</span>
+      </div>
+      <h1 class="ds-h1" style="max-width: 900px; margin-bottom: var(--space-4);">
+        Single source of truth for AdScout's visual language.
+      </h1>
+      <p class="ds-body-lg" style="max-width: 640px;">
+        Tokens for colors, type, spacing, radii, shadows, motion, and breakpoints — defined once,
+        consumed by CSS, Tailwind, and any JS framework.
+      </p>
+      <div class="row" style="margin-top: var(--space-5);">
+        <button class="ds-btn ds-btn--primary">Use the system
+          <svg class="ds-btn__arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="ds-btn ds-btn--ghost">Read the README</button>
+      </div>
+    </section>
+
+    <!-- Colors -->
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Brand & surfaces</h2>
+      <p class="ds-body-sm" style="margin-bottom: var(--space-5);">Dark stack — lower number, deeper surface.</p>
+      <div class="grid">
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-brand-lime);"></div><div class="swatch__name">--color-brand-lime</div><div class="swatch__val">rgb(201,244,20)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-brand-lime-strong);"></div><div class="swatch__name">--color-brand-lime-strong</div><div class="swatch__val">rgb(229,255,0)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-0);"></div><div class="swatch__name">--color-bg-0</div><div class="swatch__val">rgb(10,10,15)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-1);"></div><div class="swatch__name">--color-bg-1</div><div class="swatch__val">rgb(14,14,19)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-2);"></div><div class="swatch__name">--color-bg-2</div><div class="swatch__val">rgb(18,18,26)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-3);"></div><div class="swatch__name">--color-bg-3</div><div class="swatch__val">rgb(27,27,32)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-4);"></div><div class="swatch__name">--color-bg-4</div><div class="swatch__val">rgb(31,31,37)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-5);"></div><div class="swatch__name">--color-bg-5</div><div class="swatch__val">rgb(42,41,47)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-6);"></div><div class="swatch__name">--color-bg-6</div><div class="swatch__val">rgb(53,52,58)</div></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Foreground & borders</h2>
+      <div class="grid">
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-fg-1);"></div><div class="swatch__name">--color-fg-1</div><div class="swatch__val">rgb(255,255,255)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-fg-2);"></div><div class="swatch__name">--color-fg-2</div><div class="swatch__val">rgb(228,225,233)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-fg-3);"></div><div class="swatch__name">--color-fg-3</div><div class="swatch__val">rgb(196,201,172)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-fg-4);"></div><div class="swatch__name">--color-fg-4</div><div class="swatch__val">rgb(148,163,184)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-fg-5);"></div><div class="swatch__name">--color-fg-5</div><div class="swatch__val">rgb(100,116,139)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-2); border-color: var(--color-border-hairline);"></div><div class="swatch__name">--color-border-hairline</div><div class="swatch__val">rgba(68,73,51,.15)</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-bg-2); border-color: var(--color-border-hairline-strong);"></div><div class="swatch__name">--color-border-hairline-strong</div><div class="swatch__val">rgba(68,73,51,.30)</div></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Chart palette</h2>
+      <p class="ds-body-sm" style="margin-bottom: var(--space-5);">10-step categorical sequence — use in order.</p>
+      <div class="grid">
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-1);"></div><div class="swatch__name">chart-1 lime</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-2);"></div><div class="swatch__name">chart-2 green</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-3);"></div><div class="swatch__name">chart-3 orange</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-4);"></div><div class="swatch__name">chart-4 purple</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-5);"></div><div class="swatch__name">chart-5 pink</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-6);"></div><div class="swatch__name">chart-6 blue</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-7);"></div><div class="swatch__name">chart-7 cyan</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-8);"></div><div class="swatch__name">chart-8 yellow</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-9);"></div><div class="swatch__name">chart-9 red</div></div>
+        <div class="swatch"><div class="swatch__chip" style="background: var(--color-chart-10);"></div><div class="swatch__name">chart-10 violet</div></div>
+      </div>
+    </section>
+
+    <!-- Typography -->
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Type scale</h2>
+      <div class="type-row"><span class="type-row__meta">.ds-display-xl · 96/800</span><span class="ds-display-xl" style="font-size: 64px;">Aa</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-display · 72/700</span><span class="ds-display" style="font-size: 56px;">Display headline</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-h1 · 60/700</span><span class="ds-h1">Strategic intelligence layer</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-h2 · 48/700</span><span class="ds-h2">One dashboard. Every move.</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-h3 · 24/700</span><span class="ds-h3">Pick five competitors</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-body-lg · 20/400</span><span class="ds-body-lg">Built for senior marketing teams who refuse to guess.</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-body · 16/400</span><span class="ds-body">Track competitor spend across Meta and Google, continuously.</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-mono-data · 14</span><span class="ds-mono-data">€4,281,090 — DELTA_24H +12.4%</span></div>
+      <div class="type-row"><span class="type-row__meta">.ds-section-label · 10</span><span class="ds-section-label">[02] · COMPETITIVE INTELLIGENCE</span></div>
+    </section>
+
+    <!-- Components -->
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Buttons</h2>
+      <div class="row">
+        <button class="ds-btn ds-btn--primary">Book a demo
+          <svg class="ds-btn__arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+        <button class="ds-btn ds-btn--ghost">See sample report</button>
+        <button class="ds-btn ds-btn--dark">Dark button</button>
+        <button class="ds-btn ds-btn--primary ds-btn--compact">Compact</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Badges, pills & chips</h2>
+      <div class="row">
+        <span class="ds-badge ds-badge--lime">TOP</span>
+        <span class="ds-badge ds-badge--info">NEW</span>
+        <span class="ds-badge ds-badge--success">LIVE</span>
+        <span class="ds-badge ds-badge--neutral">ALL</span>
+        <span class="ds-badge ds-badge--danger">DOWN</span>
+        <span class="ds-pill"><span class="ds-dot-live"></span>LIVE · PHARMACY_SK</span>
+        <button class="ds-chip ds-chip--active">Top</button>
+        <button class="ds-chip">Newest</button>
+        <button class="ds-chip">Longest</button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Tabs</h2>
+      <div class="row">
+        <button class="ds-tab ds-tab--active">Total <span class="ds-tab__count">13</span></button>
+        <button class="ds-tab">Meta <span class="ds-tab__count">10</span></button>
+        <button class="ds-tab">Google <span class="ds-tab__count">11</span></button>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-2);">Input</h2>
+      <div class="row" style="max-width: 480px;">
+        <input class="ds-input" placeholder="Add a competitor…" />
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-4);">KPI strip</h2>
+      <div style="display: flex; flex-wrap: wrap; border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--color-border-hairline-strong);">
+        <div class="ds-kpi">
+          <div class="ds-kpi__label">TOTAL ADS</div>
+          <div class="ds-kpi__value">74K</div>
+          <div class="ds-kpi__sub">Meta 23K · Google 51K</div>
+        </div>
+        <div class="ds-kpi">
+          <div class="ds-kpi__label">EST. SPEND</div>
+          <div class="ds-kpi__value ds-kpi__value--accent">€17.9M</div>
+          <div class="ds-kpi__sub">Meta €13M · Google €4.9M</div>
+        </div>
+        <div class="ds-kpi">
+          <div class="ds-kpi__label">IMPRESSIONS</div>
+          <div class="ds-kpi__value">5,611M</div>
+          <div class="ds-kpi__sub">Combined</div>
+        </div>
+        <div class="ds-kpi" style="border-right: 0;">
+          <div class="ds-kpi__label">AVG / MONTH</div>
+          <div class="ds-kpi__value">€1.5M</div>
+          <div class="ds-kpi__sub">12 months</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-4);">Cards</h2>
+      <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));">
+        <div class="ds-card ds-card--hoverlift">
+          <div class="ds-section-label" style="margin-bottom: var(--space-3);">01 · BASE CARD</div>
+          <h4 class="ds-h4" style="margin-bottom: var(--space-2);">Card title</h4>
+          <p class="ds-body-sm">Default card — bg-3 + hairline-strong border.</p>
+        </div>
+        <div class="ds-card ds-card--inset">
+          <div class="ds-section-label" style="margin-bottom: var(--space-3);">02 · INSET</div>
+          <h4 class="ds-h4" style="margin-bottom: var(--space-2);">Inset card</h4>
+          <p class="ds-body-sm">Deeper surface — for nested content.</p>
+        </div>
+        <div class="ds-card ds-card--lime">
+          <div class="ds-section-label" style="margin-bottom: var(--space-3); color: var(--color-brand-lime);">03 · LIME ACCENT</div>
+          <h4 class="ds-h4" style="margin-bottom: var(--space-2);">Lime card</h4>
+          <p class="ds-body-sm">For the AI executive summary block.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-4);">Terminal CLI</h2>
+      <div class="ds-terminal">
+        <span class="ds-terminal__prompt">ADSCOUT_TERMINAL_V2.4 ~</span>
+        <span class="ds-terminal__cursor">|</span>
+        <span class="ds-terminal__meta">AUTO_FETCH · LAST UPDATE 02H AGO</span>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-4);">Radii & shadows</h2>
+      <div class="grid">
+        <div style="aspect-ratio: 1; background: var(--color-bg-3); border-radius: var(--radius-xs); border: 1px solid var(--color-border-hairline-strong); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">xs · 4</span></div>
+        <div style="aspect-ratio: 1; background: var(--color-bg-3); border-radius: var(--radius-sm); border: 1px solid var(--color-border-hairline-strong); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">sm · 8</span></div>
+        <div style="aspect-ratio: 1; background: var(--color-bg-3); border-radius: var(--radius-md); border: 1px solid var(--color-border-hairline-strong); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">md · 12</span></div>
+        <div style="aspect-ratio: 1; background: var(--color-bg-3); border-radius: var(--radius-lg); border: 1px solid var(--color-border-hairline-strong); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">lg · 16</span></div>
+        <div style="aspect-ratio: 1; background: var(--color-bg-3); border-radius: var(--radius-xl); border: 1px solid var(--color-border-hairline-strong); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">xl · 24</span></div>
+        <div style="aspect-ratio: 1; background: var(--color-bg-3); border-radius: var(--radius-pill); border: 1px solid var(--color-border-hairline-strong); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">pill</span></div>
+      </div>
+      <div class="row" style="margin-top: var(--space-7);">
+        <div style="width: 140px; height: 80px; background: var(--color-bg-3); border-radius: var(--radius-md); box-shadow: var(--shadow-sm); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">shadow-sm</span></div>
+        <div style="width: 140px; height: 80px; background: var(--color-bg-3); border-radius: var(--radius-md); box-shadow: var(--shadow-md); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">shadow-md</span></div>
+        <div style="width: 140px; height: 80px; background: var(--color-bg-3); border-radius: var(--radius-md); box-shadow: var(--shadow-lg); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">shadow-lg</span></div>
+        <div style="width: 140px; height: 80px; background: var(--color-bg-3); border-radius: var(--radius-md); box-shadow: var(--shadow-glow-lime-soft); display: flex; align-items: center; justify-content: center;"><span class="ds-mono-sm">glow-lime</span></div>
+      </div>
+    </section>
+
+    <section class="block">
+      <h2 class="ds-h3" style="margin-bottom: var(--space-4);">Spacing scale</h2>
+      <div style="display: flex; flex-direction: column; gap: var(--space-3);">
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-1 · 4</span><span style="height: 16px; width: var(--space-1); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-2 · 8</span><span style="height: 16px; width: var(--space-2); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-3 · 12</span><span style="height: 16px; width: var(--space-3); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-4 · 16</span><span style="height: 16px; width: var(--space-4); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-5 · 24</span><span style="height: 16px; width: var(--space-5); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-6 · 32</span><span style="height: 16px; width: var(--space-6); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-7 · 48</span><span style="height: 16px; width: var(--space-7); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-8 · 64</span><span style="height: 16px; width: var(--space-8); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-9 · 96</span><span style="height: 16px; width: var(--space-9); background: var(--color-brand-lime);"></span></div>
+        <div class="row"><span class="ds-mono-sm" style="width: 100px;">space-10 · 128</span><span style="height: 16px; width: var(--space-10); background: var(--color-brand-lime);"></span></div>
+      </div>
+    </section>
+
+    <footer style="margin-top: var(--space-10); padding-top: var(--space-5); border-top: 1px solid var(--color-border-hairline);">
+      <span class="ds-section-label">© 2026 ADSCOUT DESIGN SYSTEM · v1.0.0</span>
+    </footer>
+
+  </main>
+</body>
+</html>
