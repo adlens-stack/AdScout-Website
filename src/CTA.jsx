@@ -26,16 +26,19 @@ function Pricing({ lang }) {
                 }}>MOST POPULAR</div>
               )}
               <div>
+                {p.label && <div style={{ font: "400 9px/1 var(--font-mono)", letterSpacing: 1.4, color: "var(--fg-4)", textTransform: "uppercase", marginBottom: 8 }}>{p.label}</div>}
                 <div style={{ font: "700 22px/1 var(--font-display)", color: "#fff", letterSpacing: -0.4 }}>{p.n}</div>
                 <div style={{ font: "400 13px/1.5 var(--font-body)", color: "var(--fg-3)", marginTop: 8 }}>{p.sub}</div>
               </div>
               <div style={{ display: "flex", alignItems: "baseline", gap: 4 }}>
-                <span style={{ font: "700 44px/1 var(--font-mono)", color: p.hl ? "var(--brand-lime)" : "#fff", letterSpacing: -1 }}>{p.p}</span>
+                <span style={{ font: `700 ${p.p.length > 8 ? "clamp(18px,2.2vw,24px)" : "44px"}/1.1 var(--font-mono)`, color: p.hl ? "var(--brand-lime)" : "#fff", letterSpacing: -1 }}>{p.p}</span>
                 <span style={{ font: "400 12px/1 var(--font-mono)", color: "var(--fg-5)" }}>{p.per}</span>
               </div>
               <ul style={{ margin: 0, padding: 0, listStyle: "none", display: "flex", flexDirection: "column", gap: 10, flex: 1 }}>
-                {p.pts.map((pt) => (
-                  <li key={pt} style={{ display: "flex", gap: 10, alignItems: "flex-start", font: "400 13px/1.5 var(--font-body)", color: "var(--fg-2)" }}>
+                {p.pts.map((pt, i) => pt && typeof pt === "object" && pt.h ? (
+                  <li key={i} style={{ font: "400 9px/1 var(--font-mono)", letterSpacing: 1.4, color: "var(--fg-4)", textTransform: "uppercase", paddingTop: 6 }}>{pt.h}</li>
+                ) : (
+                  <li key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start", font: "400 13px/1.5 var(--font-body)", color: "var(--fg-2)" }}>
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke={p.hl ? "var(--brand-lime)" : "var(--fg-3)"} strokeWidth="2.5" strokeLinecap="round" style={{ marginTop: 3, flexShrink: 0 }}><polyline points="20 6 9 17 4 12"/></svg>
                     {pt}
                   </li>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>404 — AdScout</title>
+  <link rel="stylesheet" href="/colors_and_type.css">
+  <style>
+    html, body {
+      margin: 0; padding: 0;
+      background: var(--bg-0);
+      color: var(--fg-2);
+      font-family: var(--font-body);
+      min-height: 100vh;
+    }
+    * { box-sizing: border-box; }
+    a { text-decoration: none; color: inherit; }
+    .btn-reset { border: 0; background: none; cursor: pointer; font: inherit; color: inherit; padding: 0; }
+
+    @keyframes ping {
+      0%   { transform: scale(1); opacity: .7; }
+      80%, 100% { transform: scale(2.2); opacity: 0; }
+    }
+
+    /* Nav */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      height: 72px;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 32px;
+      background: rgba(10,10,15,0.75);
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border-hairline);
+    }
+    .brand {
+      display: flex; align-items: center; gap: 10px;
+    }
+    .dot-wrap {
+      position: relative; width: 11px; height: 11px;
+    }
+    .dot-core {
+      position: absolute; inset: 0; border-radius: 3px;
+      background: var(--brand-lime);
+      box-shadow: 0 0 12px rgba(201,244,20,0.6);
+    }
+    .dot-ring {
+      position: absolute; inset: 0; border-radius: 3px;
+      background: var(--brand-lime);
+      animation: ping 2.4s cubic-bezier(0.22,1,0.36,1) infinite;
+      opacity: 0.6;
+    }
+    .wordmark {
+      font: 800 20px/1 var(--font-display);
+      letter-spacing: -1px;
+      color: #fff;
+    }
+
+    /* 404 content */
+    main {
+      min-height: 100vh;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 72px 32px 48px;
+      text-align: center;
+    }
+    .error-num {
+      font: 700 clamp(96px, 16vw, 180px)/1 var(--font-mono);
+      color: var(--brand-lime);
+      letter-spacing: -6px;
+      text-shadow: 0 0 60px rgba(201,244,20,0.25);
+      margin: 0;
+    }
+    .error-msg {
+      margin: 24px 0 0;
+      font: 400 clamp(16px, 2vw, 20px)/1.5 var(--font-body);
+      color: var(--fg-4);
+    }
+    .back-btn {
+      margin-top: 40px;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--brand-lime);
+      color: #000;
+      font: 700 15px/1 var(--font-body);
+      padding: 14px 28px;
+      border-radius: 12px;
+      transition: transform 160ms ease, filter 160ms ease;
+    }
+    .back-btn:hover  { transform: translateY(-1px); filter: brightness(1.06); }
+    .back-btn:active { transform: scale(0.97); }
+    .back-arrow {
+      transition: transform 160ms ease;
+    }
+    .back-btn:hover .back-arrow { transform: translateX(3px); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="brand" href="/">
+      <div class="dot-wrap">
+        <div class="dot-ring"></div>
+        <div class="dot-core"></div>
+      </div>
+      <span class="wordmark">AdScout</span>
+    </a>
+  </nav>
+
+  <main>
+    <p class="error-num">404</p>
+    <p class="error-msg">This page doesn't exist.</p>
+    <a class="back-btn" href="/">
+      Back to home
+      <svg class="back-arrow" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round">
+        <path d="M5 12h14M13 6l6 6-6 6"/>
+      </svg>
+    </a>
+  </main>
+
+</body>
+</html>

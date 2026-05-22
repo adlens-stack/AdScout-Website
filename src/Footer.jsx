@@ -2,12 +2,12 @@ function Footer({ lang }) {
   const { openContact } = useContact();
   const cols = lang === "SK" ? [
     { t: "PRODUKT",  l: [{ label: "Dashboard", href: "#dashboard" }, { label: "Creative Wall", href: "#creative" }, { label: "Riešenia", href: "#how" }, { label: "Cenník", href: "#pricing" }] },
-    { t: "SPOLOČNOSŤ", l: [{ label: "O nás", href: `about.html?lang=${lang}` }, { label: "Kontakt", action: "contact" }] },
-    { t: "ZDROJE",  l: [{ label: "Metodológia", href: `methodology.html?lang=${lang}` }, { label: "Case studies", href: `case-studies.html?lang=${lang}` }] },
+    { t: "SPOLOČNOSŤ", l: [{ label: "O nás", href: `/about?lang=${lang}` }, { label: "Kontakt", action: "contact" }] },
+    { t: "ZDROJE",  l: [{ label: "Metodológia", href: `/methodology?lang=${lang}` }, { label: "Case studies", href: `/case-studies?lang=${lang}` }] },
   ] : [
     { t: "PRODUCT",  l: [{ label: "Dashboard", href: "#dashboard" }, { label: "Creative Wall", href: "#creative" }, { label: "Solutions", href: "#how" }, { label: "Pricing", href: "#pricing" }] },
-    { t: "COMPANY",  l: [{ label: "About", href: `about.html?lang=${lang}` }, { label: "Contact", action: "contact" }] },
-    { t: "RESOURCES",l: [{ label: "Methodology", href: `methodology.html?lang=${lang}` }, { label: "Case studies", href: `case-studies.html?lang=${lang}` }] },
+    { t: "COMPANY",  l: [{ label: "About", href: `/about?lang=${lang}` }, { label: "Contact", action: "contact" }] },
+    { t: "RESOURCES",l: [{ label: "Methodology", href: `/methodology?lang=${lang}` }, { label: "Case studies", href: `/case-studies?lang=${lang}` }] },
   ];
   return (
     <footer className="pad-sm" style={{ background: "var(--bg-0)", borderTop: "1px solid var(--border-hairline)", padding: "64px 32px 32px" }}>
