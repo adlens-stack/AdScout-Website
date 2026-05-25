@@ -39,6 +39,8 @@
         functionality_storage:   p.functional ? 'granted' : 'denied',
         personalization_storage: p.functional ? 'granted' : 'denied'
       });
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({ event: 'consent_update', consent_prefs: p });
       return;
     }
   } catch(e) {}
