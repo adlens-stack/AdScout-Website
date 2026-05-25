@@ -9574,9 +9574,15 @@ function App() {
     _React$useState0 = _slicedToArray(_React$useState9, 2),
     contactPlan = _React$useState0[0],
     setContactPlan = _React$useState0[1];
+  var _React$useStateCT = React.useState("demo"),
+    _React$useStateCT2 = _slicedToArray(_React$useStateCT, 2),
+    contactType = _React$useStateCT2[0],
+    setContactType = _React$useStateCT2[1];
   var openContact = React.useCallback(function () {
     var plan = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "demo";
     setContactPlan(plan);
+    setContactType(type);
     setContactOpen(true);
   }, []);
   var closeContact = React.useCallback(function () {
@@ -9725,6 +9731,7 @@ function App() {
     lang: lang,
     open: contactOpen,
     plan: contactPlan,
+    formType: contactType,
     onClose: closeContact,
     __source: {
       fileName: _jsxFileName,
