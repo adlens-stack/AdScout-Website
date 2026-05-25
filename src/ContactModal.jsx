@@ -193,6 +193,8 @@ function ContactModal({ lang, open, plan, formType = "demo", onClose }) {
     const ref = "AS-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     setRefId(ref);
     setDone(true);
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ event: 'form_submit', form_type: formType });
     setSubmitting(false);
   };
 
