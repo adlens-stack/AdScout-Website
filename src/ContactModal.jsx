@@ -709,7 +709,7 @@ function PlanCard({ plan, active, onClick, compact = false }) {
               gridTemplateColumns: "repeat(auto-fill, minmax(180px, 1fr))",
               gap: "6px 14px",
             }}>
-              {plan.pts.map((pt) => (
+              {plan.pts.filter((pt) => typeof pt === "string").map((pt) => (
                 <li key={pt} style={{
                   display: "flex", gap: 8, alignItems: "flex-start",
                   font: "400 12px/1.4 var(--font-body)", color: "var(--fg-2)",
