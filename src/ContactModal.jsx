@@ -223,7 +223,14 @@ function ContactModal({ lang, open, plan, formType = "demo", onClose }) {
     setRefId(ref);
     setDone(true);
     window.dataLayer = window.dataLayer || [];
-    window.dataLayer.push({ event: 'form_submit', form_type: formType });
+    window.dataLayer.push({
+      event: 'form_submit',
+      form_type: formType,
+      user_data: {
+        email_address: email.trim(),
+        sha256_email_address: '',
+      },
+    });
     setSubmitting(false);
   };
 
