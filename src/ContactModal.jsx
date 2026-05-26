@@ -185,11 +185,40 @@ function ContactModal({ lang, open, plan, formType = "demo", onClose }) {
       ts: new Date().toISOString(),
       source: typeof window !== "undefined" ? window.location.href : "",
     };
-    // TODO: replace with real endpoint (Formspree / Web3Forms / custom API)
-    // eslint-disable-next-line no-console
-    console.log("[AdScout] contact-form submit (mocked):", payload);
+    const WEB3FORMS_KEYS = {
+      demo:    '28121ad6-cd21-4c51-b9b8-4fe4ab0ce824',
+      quote:   '353bd520-12dc-42b0-a99f-c04bc4e8323f',
+      contact: '28121ad6-cd21-4c51-b9b8-4fe4ab0ce824',
+    };
 
-    await new Promise((r) => setTimeout(r, 280));
+    const subjectMap = {
+      demo:    'Book a Demo',
+      quote:   'Get a Quote',
+      contact: 'Contact',
+    };
+
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: WEB3FORMS_KEYS[formType] || WEB3FORMS_KEYS.demo,
+        subject: `AdScout — ${subjectMap[formType] || 'Form'} from ${payload.company}`,
+        from_name: payload.name,
+        reply_to: payload.email,
+        email: payload.email,
+        company: payload.company,
+        plan: payload.plan || 'N/A',
+        form_type: payload.form_type,
+        gdpr_consent: payload.gdpr_consent,
+        marketing_opt_in: payload.marketing_opt_in,
+        source: payload.source,
+        lang: payload.lang,
+      }),
+    });
+
+    if (!res.ok) {
+      throw new Error('Submission failed');
+    }
     const ref = "AS-" + Math.random().toString(36).slice(2, 8).toUpperCase();
     setRefId(ref);
     setDone(true);
